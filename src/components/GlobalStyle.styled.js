@@ -19,10 +19,12 @@ const GlobalStyle = createGlobalStyle`
 }
 
 html {
+	height: 100%;
 	box-sizing: border-box;
 }
 
 body {
+	height: 100%;
 	background-color: var(--off-white);
 	color: var(--black);
 	margin: 0;

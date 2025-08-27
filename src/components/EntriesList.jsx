@@ -1,5 +1,7 @@
 import {
   ColumnOne,
+  ContentWrapper,
+  DummyDiv,
   HeaderButton,
   HeaderButtonWrapper,
   HeaderWrapper,
@@ -41,12 +43,106 @@ const EntriesList = ({ data }) => {
           </HeaderButton>
         </HeaderButtonWrapper>
       </HeaderWrapper>
-      <Section>
-        <HeadingThree>August 25. 2025</HeadingThree>
-        <SectionList>
-          <SectionItem>list</SectionItem>
-        </SectionList>
-      </Section>
+      <ContentWrapper>
+        <Section>
+          <HeadingThree>August 2025</HeadingThree>
+          <SectionList>
+            <SectionItem>
+              <DummyDiv>img</DummyDiv>
+              <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Perspiciatis, odio.
+              </p>
+              <DummyDiv>
+                <h2>25</h2>
+                <p>Mon</p>
+              </DummyDiv>
+            </SectionItem>
+            <SectionItem>
+              <DummyDiv>img</DummyDiv>
+              <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Perspiciatis, odio.
+              </p>
+              <DummyDiv>
+                <h2>25</h2>
+                <p>Mon</p>
+              </DummyDiv>
+            </SectionItem>
+            <SectionItem>
+              <DummyDiv>img</DummyDiv>
+              <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Perspiciatis, odio.
+              </p>
+              <DummyDiv>
+                <h2>25</h2>
+                <p>Mon</p>
+              </DummyDiv>
+            </SectionItem>
+            <SectionItem>
+              <DummyDiv>img</DummyDiv>
+              <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Perspiciatis, odio.
+              </p>
+              <DummyDiv>
+                <h2>25</h2>
+                <p>Mon</p>
+              </DummyDiv>
+            </SectionItem>
+          </SectionList>
+        </Section>
+        <Section>
+          <HeadingThree>July 2025</HeadingThree>
+          <SectionList>
+            <SectionItem>
+              <DummyDiv>img</DummyDiv>
+              <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Perspiciatis, odio.
+              </p>
+              <DummyDiv>
+                <h2>25</h2>
+                <p>Mon</p>
+              </DummyDiv>
+            </SectionItem>
+            <SectionItem>
+              <DummyDiv>img</DummyDiv>
+              <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Perspiciatis, odio.
+              </p>
+              <DummyDiv>
+                <h2>25</h2>
+                <p>Mon</p>
+              </DummyDiv>
+            </SectionItem>
+            <SectionItem>
+              <DummyDiv>img</DummyDiv>
+              <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Perspiciatis, odio.
+              </p>
+              <DummyDiv>
+                <h2>25</h2>
+                <p>Mon</p>
+              </DummyDiv>
+            </SectionItem>
+            <SectionItem>
+              <DummyDiv>img</DummyDiv>
+              <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Perspiciatis, odio.
+              </p>
+              <DummyDiv>
+                <h2>25</h2>
+                <p>Mon</p>
+              </DummyDiv>
+            </SectionItem>
+          </SectionList>
+        </Section>
+      </ContentWrapper>
     </ColumnOne>
   );
 };

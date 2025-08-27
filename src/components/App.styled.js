@@ -20,6 +20,7 @@ export const SideNavWrapper = styled.nav`
 export const HeaderWrapper = styled.header`
   display: flex;
   justify-content: space-between;
+  // flex: 0 0 auto;
   padding: 8px;
   border-bottom: 1px solid var(--muted-gray);
 `;
@@ -89,7 +90,6 @@ export const Nav = styled.nav``;
 export const Main = styled.main`
   display: flex;
   flex: 1;
-  height: 100vh;
 `;
 
 export const Section = styled.section``;
@@ -99,22 +99,68 @@ export const HeadingThree = styled.h3``;
 export const ColumnOne = styled.section`
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex: 1 1 30%;
   border-right: 1px solid var(--muted-gray);
 `;
 
 export const SectionList = styled.ul``;
 
-export const SectionItem = styled.li``;
+export const SectionItem = styled.li`
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 4px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: var(--soft-indigo);
+    color: var(--off-white);
+  }
+`;
 
 export const ColumnTwo = styled.section`
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex: 1 1 70%;
   border-right: 1px solid var(--muted-gray);
 `;
 
-// export const SectionHeader = styled.header`
-//   display: flex;
-//   flex-direction: column;
-// `;
+export const ColumnTwoSection = styled.section`
+  overflow: auto;
+`;
+
+export const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  gap: 2px;
+`;
+
+export const Article = styled.article`
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  overflow: auto;
+  background-color: pink;
+`;
+
+export const DummyDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: auto;
+  background-color: var(--muted-gray);
+`;
+
+export const DummyPicture = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  width: 100%;
+  height: 250px;
+  background-color: var(--muted-gray);
+  font-size: 60px;
+`;

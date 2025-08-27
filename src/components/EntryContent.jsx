@@ -7,14 +7,16 @@ import {
   HeadingThree,
   SectionList,
   SectionItem,
+  Article,
+  DummyPicture,
+  ColumnTwoSection,
 } from "./App.styled";
 
 import {
-  LuLayoutDashboard,
-  LuCalendarDays,
-  LuList,
-  LuFilter,
-  LuSearch,
+  LuArrowRight,
+  LuArrowLeft,
+  LuPlus,
+  LuFullscreen,
 } from "react-icons/lu";
 
 const EntryContent = () => {
@@ -23,30 +25,55 @@ const EntryContent = () => {
       <HeaderWrapper>
         <HeaderButtonWrapper>
           <HeaderButton>
-            <LuList size="25" />
+            <LuArrowLeft size="25" />
           </HeaderButton>
           <HeaderButton>
-            <LuLayoutDashboard size="25" />
-          </HeaderButton>
-          <HeaderButton>
-            <LuCalendarDays size="25" />
+            <LuArrowRight size="25" />
           </HeaderButton>
         </HeaderButtonWrapper>
+        <h3>August 25. 2025</h3>
         <HeaderButtonWrapper>
           <HeaderButton>
-            <LuFilter size="25" />
+            <LuFullscreen size="25" />
           </HeaderButton>
           <HeaderButton>
-            <LuSearch size="25" />
+            <LuPlus size="25" />
           </HeaderButton>
         </HeaderButtonWrapper>
       </HeaderWrapper>
-      <Section>
-        <HeadingThree>August 25. 2025</HeadingThree>
-        <SectionList>
-          <SectionItem>list</SectionItem>
-        </SectionList>
-      </Section>
+      <ColumnTwoSection>
+        <Article>
+          <h3>Lorem ipsum dolor sit.</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt
+            delectus saepe, accusamus molestiae doloremque omnis itaque amet
+            explicabo commodi voluptas facilis necessitatibus ullam maxime,
+            tempora maiores quo velit autem. Delectus, quisquam facere eveniet
+            quas voluptate non deserunt dolorem odit autem natus officiis ipsum
+            corrupti rem hic illum aliquam, excepturi ipsam? Hic eos aliquid
+            porro quasi, excepturi, nemo assumenda provident blanditiis cum
+            aperiam nulla magni molestiae voluptatibus, iusto suscipit
+            asperiores ratione repudiandae facilis neque explicabo. Sequi, illo
+            rerum est optio earum neque, molestiae aut totam fugit sapiente
+            natus enim qui mollitia sit illum, impedit recusandae sint accusamus
+            placeat commodi eligendi. Nobis sunt impedit repellat earum
+            similique accusantium culpa vel vero, quidem, tempore suscipit
+            numquam sint et optio incidunt. Facilis consequuntur id beatae culpa
+            quasi sit! Laborum omnis maxime ipsum minus similique ipsa totam,
+            reiciendis optio quis cumque ad tempore corrupti facilis temporibus
+            quos mollitia necessitatibus aliquid amet pariatur maiores soluta
+            asperiores est. Eum adipisci dolores praesentium quaerat. Dolorum
+            placeat voluptas deserunt cupiditate, dignissimos nihil, ea cum
+            aliquid quas, porro vero amet maiores quaerat ducimus non fugit
+            dolore! Ullam odit minus est consequuntur mollitia quod at! Adipisci
+            necessitatibus doloribus accusantium facere minima laboriosam
+            voluptatum magni illum nemo aspernatur sequi animi, accusamus
+            fugiat?
+          </p>
+          <DummyPicture>i am a photo</DummyPicture>
+        </Article>
+        <div>asdasd</div>
+      </ColumnTwoSection>
     </ColumnTwo>
   );
 };
