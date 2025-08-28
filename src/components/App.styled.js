@@ -164,3 +164,20 @@ export const DummyPicture = styled.div`
   background-color: var(--muted-gray);
   font-size: 60px;
 `;
+
+export const EditorWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  border: 1px dashed blue;
+`;
+
+export const EditorContent = styled.div`
+  min-width: 500px;
+  height: 30vh;
+
+  border: 1px solid red;
+`;
+
+export const ToolbarWrapper = styled.div`
+  display: flex;
+`;

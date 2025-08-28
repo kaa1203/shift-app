@@ -1,13 +1,7 @@
-import EntriesList from "../components/EntriesList";
-import EntryContent from "../components/EntryContent";
+import Content from "../components/Content";
 
 const Entries = () => {
-  return (
-    <>
-      <EntriesList />
-      <EntryContent />
-    </>
-  );
+  return <Content />;
 };
 
 export default Entries;

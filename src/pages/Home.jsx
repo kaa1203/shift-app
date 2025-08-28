@@ -1,5 +1,7 @@
+import Editor from "../components/TextEditor/Editor";
+
 const Home = () => {
-  return <>Home</>;
+  return <Editor />;
 };
 
 export default Home;
