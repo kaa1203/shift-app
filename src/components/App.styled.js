@@ -165,19 +165,33 @@ export const DummyPicture = styled.div`
   font-size: 60px;
 `;
 
-export const EditorWrapper = styled.div`
+export const ProfileContainer = styled.section`
   display: flex;
   flex-direction: column;
-  border: 1px dashed blue;
+  border: 1px solid yellow;
+  flex: 1;
 `;
 
-export const EditorContent = styled.div`
-  min-width: 500px;
-  height: 30vh;
-
-  border: 1px solid red;
+export const IdentitySection = styled.section`
+  position: relative;
+  height: 200px;
 `;
-
-export const ToolbarWrapper = styled.div`
-  display: flex;
+export const ProfilePicture = styled.img`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+  border: 1px dashed red;
+  object-fit: cover;
 `;
+export const ProfileBanner = styled.div`
+  height: 100%;
+  background-color: pink;
+`;
+export const QuickStatsSection = styled.section``;
+export const MoodSection = styled.section``;
+export const ActivitySection = styled.section``;
+export const AchievementSection = styled.section``;
+export const FooterSection = styled.section``;

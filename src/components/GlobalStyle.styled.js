@@ -72,6 +72,9 @@ button {
 	}
 }
  
+.italic { 
+	font-style: italic;
+}
 `;
 
 export default GlobalStyle;
