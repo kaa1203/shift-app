@@ -168,30 +168,69 @@ export const DummyPicture = styled.div`
 export const ProfileContainer = styled.section`
   display: flex;
   flex-direction: column;
-  border: 1px solid yellow;
   flex: 1;
 `;
 
 export const IdentitySection = styled.section`
   position: relative;
-  height: 200px;
+  height: 350px;
+  margin-bottom: 90px;
 `;
+
 export const ProfilePicture = styled.img`
   position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   height: 200px;
   width: 200px;
   border: 1px dashed red;
   object-fit: cover;
 `;
+
 export const ProfileBanner = styled.div`
   height: 100%;
-  background-color: pink;
+  background: url("https://picsum.photos/400/200") center center/cover no-repeat;
 `;
-export const QuickStatsSection = styled.section``;
+
+export const QuickStatsWrapper = styled.div`
+  position: absolute;
+  bottom: -30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 95%;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: var(--off-white);
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px 1px black;
+`;
+
+export const StatsCard = styled.div`
+  flex: 1;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &:nth-child(2) {
+    border-left: 1px solid red;
+    border-right: 1px solid red;
+  }
+`;
 export const MoodSection = styled.section``;
 export const ActivitySection = styled.section``;
-export const AchievementSection = styled.section``;
+
+export const AchievementSection = styled.section`
+  padding: 10px;
+`;
+
+export const BadgeContainer = styled.div``;
+
+export const BadgeWrapper = styled.div``;
+
+export const Badge = styled.div``;
+
 export const FooterSection = styled.section``;
