@@ -220,17 +220,46 @@ export const StatsCard = styled.div`
     border-right: 1px solid red;
   }
 `;
-export const MoodSection = styled.section``;
+export const MoodSection = styled.section`
+  padding: 10px;
+`;
+
+export const MoodContainer = styled.div``;
+
+export const MoodWrapper = styled.div``;
+
+export const MoodGraphWrapper = styled.div``;
+
 export const ActivitySection = styled.section``;
 
 export const AchievementSection = styled.section`
   padding: 10px;
 `;
 
-export const BadgeContainer = styled.div``;
+export const BadgeContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 30px;
+`;
 
-export const BadgeWrapper = styled.div``;
+export const BadgeWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 1 auto;
+  border: 1px solid var(--black);
+  gap: 15px;
+  padding: 5px;
+  border-radius: 5px;
+`;
 
-export const Badge = styled.div``;
-
-export const FooterSection = styled.section``;
+export const Badge = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 55px;
+  height: 55px;
+  border: 1px solid var(--black);
+  border-radius: 50%;
+`;

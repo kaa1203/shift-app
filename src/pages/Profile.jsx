@@ -1,6 +1,6 @@
+import { FaMedal } from "react-icons/fa";
 import {
   ActivitySection,
-  FooterSection,
   MoodSection,
   ProfileContainer,
   IdentitySection,
@@ -12,6 +12,9 @@ import {
   BadgeWrapper,
   Badge,
   BadgeContainer,
+  MoodContainer,
+  MoodWrapper,
+  MoodGraphWrapper,
 } from "../components/App.styled";
 
 const Profile = () => (
@@ -37,12 +40,57 @@ const Profile = () => (
         </StatsCard>
       </QuickStatsWrapper>
     </IdentitySection>
-    <MoodSection></MoodSection>
+    <MoodSection>
+      <h2>Mood</h2>
+      <MoodContainer>
+        <MoodWrapper>
+          <div>Mood this week</div>
+          <div>Most used tag this week</div>
+        </MoodWrapper>
+        <MoodGraphWrapper>
+          This will be replaced with a line graph showing this weeks mood, with
+          an option to redirect to the insights page for full graph
+        </MoodGraphWrapper>
+      </MoodContainer>
+    </MoodSection>
     <AchievementSection>
       <h2>Achievements</h2>
       <BadgeContainer>
         <BadgeWrapper>
-          <h2>Badge 1</h2> <p>This is a placeholder for badge</p>
+          <Badge>
+            <FaMedal size="30" />
+          </Badge>
+          <div>
+            <h2>Badge 1</h2>
+            <p>This is a placeholder for badge</p>
+          </div>
+        </BadgeWrapper>
+        <BadgeWrapper>
+          <Badge>
+            <FaMedal size="30" />
+          </Badge>
+          <div>
+            <h2>Badge 2</h2>
+            <p>This is a placeholder for badge</p>
+          </div>
+        </BadgeWrapper>
+        <BadgeWrapper>
+          <Badge>
+            <FaMedal size="30" />
+          </Badge>
+          <div>
+            <h2>Badge 3</h2>
+            <p>This is a placeholder for badge</p>
+          </div>
+        </BadgeWrapper>
+        <BadgeWrapper>
+          <Badge>
+            <FaMedal size="30" />
+          </Badge>
+          <div>
+            <h2>Badge 4</h2>
+            <p>This is a placeholder for badge</p>
+          </div>
         </BadgeWrapper>
       </BadgeContainer>
     </AchievementSection>
