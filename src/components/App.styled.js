@@ -90,10 +90,12 @@ export const Nav = styled.nav``;
 export const Main = styled.main`
   display: flex;
   flex: 1;
+  overflow: auto;
 `;
 
 export const Section = styled.section``;
 
+export const HeadingOne = styled.h1``;
 export const HeadingThree = styled.h3``;
 
 export const ColumnOne = styled.section`
@@ -165,7 +167,7 @@ export const DummyPicture = styled.div`
   font-size: 60px;
 `;
 
-export const ProfileContainer = styled.section`
+export const ProfileContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -173,56 +175,139 @@ export const ProfileContainer = styled.section`
 
 export const IdentitySection = styled.section`
   position: relative;
-  height: 350px;
-  margin-bottom: 90px;
+  min-height: 300px;
+  margin-bottom: 180px;
+  color: var(--light-gray);
+`;
+
+export const ProfileWrapper = styled.div`
+  position: relative;
+  top: -80px;
+  display: flex;
+  align-items: end;
+  gap: 16px;
+  padding: 25px;
+  background-color: var(--soft-indigo);
+`;
+
+export const ProfilePictureWrapper = styled.div`
+  position: relative;
+  top: -40px;
+  height: 200px;
+  width: 200px;
+
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    inset: -4px;
+    border-radius: 50%;
+    background-color: var(--soft-indigo);
+    z-index: 9;
+  }
 `;
 
 export const ProfilePicture = styled.img`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: relative;
   border-radius: 50%;
-  height: 200px;
-  width: 200px;
-  border: 1px dashed red;
+  height: 100%;
+  width: 100%;
   object-fit: cover;
+  z-index: 10;
+`;
+
+export const ProfileIconWrapper = styled.div`
+  display: inline-flex;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  right: 15%;
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+  z-index: 11;
+  color: var(--off-white);
+  background-color: var(--soft-indigo);
+  border: 1px solid var(--off-white);
+
+  &:hover {
+    background-color: var(--off-white);
+    border: 1px solid var(--soft-indigo);
+    color: var(--soft-indigo);
+  }
 `;
 
 export const ProfileBanner = styled.div`
+  position: relative;
   height: 100%;
-  background: url("https://picsum.photos/400/200") center center/cover no-repeat;
+  // background: url("https://picsum.photos/200/1500") center center/cover
+  //   no-repeat;
+  background-color: grey;
+  z-index: 5;
+`;
+
+export const UserWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: start;
+  justify-content: center;
+`;
+
+export const ProfileBody = styled.section`
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 15px;
+  border: 1px solid red;
+`;
+
+export const MiscWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  gap: 15px;
+  flex: 1;
+`;
+
+export const ButtonWrapper = styled.div`
+  align-self: end;
+`;
+
+export const ProfileButton = styled.button`
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 16px;
+  border: 1px solid var(--off-white);
+  margin-left: 10px;
+
+  &:hover {
+    background-color: var(--off-white);
+    color: var(--soft-indigo);
+    border: 1px solid var(--soft-indigo);
+  }
 `;
 
 export const QuickStatsWrapper = styled.div`
-  position: absolute;
-  bottom: -30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 95%;
   display: flex;
-  justify-content: space-evenly;
-  background-color: var(--off-white);
-  border-radius: 15px;
-  box-shadow: 0px 0px 10px 1px black;
+  justify-content: end;
+  align-items: end;
 `;
 
 export const StatsCard = styled.div`
-  flex: 1;
-  height: 100px;
+  flex: 0 0 25%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: end;
   align-items: center;
+`;
 
-  &:nth-child(2) {
-    border-left: 1px solid red;
-    border-right: 1px solid red;
-  }
-`;
-export const MoodSection = styled.section`
-  padding: 10px;
-`;
+export const MoodSection = styled.section``;
 
 export const MoodContainer = styled.div``;
 
@@ -232,9 +317,7 @@ export const MoodGraphWrapper = styled.div``;
 
 export const ActivitySection = styled.section``;
 
-export const AchievementSection = styled.section`
-  padding: 10px;
-`;
+export const AchievementSection = styled.section``;
 
 export const BadgeContainer = styled.div`
   display: flex;
