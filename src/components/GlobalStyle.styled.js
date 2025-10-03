@@ -10,8 +10,11 @@ const GlobalStyle = createGlobalStyle`
 	--black: #2d2d2d; //text
 	--light-gray: #e6e6e6; //text
 	--muted-gray: #a1a1aa; //neutral
-  --soft-green:	#73d957; //success
+	--muted-gray-transparent: #a1a1aab9; //neutral transparent
+   --soft-green:	#73d957; //success
 	--coral-red: #ff6b6b; //warning
+	--entry-mask: linear-gradient( to bottom, var(--muted-gray-transparent), var(--muted-gray)
+  );
 }
 
 *, *:before, *:after {
@@ -74,6 +77,10 @@ button {
  
 .italic { 
 	font-style: italic;
+}
+
+.maskIsHidden {
+	background: var(--entry-mask)
 }
 `;
 

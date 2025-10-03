@@ -58,7 +58,7 @@ export const NavMenu = styled.ul`
   flex-direction: column;
   gap: 4px;
   margin: 8px 0;
-  margin-top: ${(props) => (props.$margin === "bottom" ? "auto" : "0")};
+  margin-top: ${({ $margin }) => ($margin === "bottom" ? "auto" : "0")};
 `;
 
 export const NavItem = styled.li`
@@ -260,6 +260,7 @@ export const UserWrapper = styled.div`
 export const ProfileBody = styled.section`
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
   gap: 20px;
   padding: 15px;
   border: 1px solid red;
@@ -319,6 +320,39 @@ export const ActivitySection = styled.section``;
 
 export const AchievementSection = styled.section``;
 
+export const EntrySection = styled.section`
+  position: relative;
+`;
+
+export const EntryWrapper = styled.div`
+  height: ${({ $isHidden }) => ($isHidden ? "200px" : "auto")};
+  overflow: ${({ $isHidden }) => ($isHidden ? "hidden" : "visible")};
+  margin-bottom: ${({ $isHidden }) => ($isHidden ? "0" : "30px")};
+`;
+
+export const EntryMask = styled.div`
+  position: absolute;
+  bottom: 0;
+  height: 50%;
+  width: 100%;
+`;
+
+export const EntryMaskButton = styled.button`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  color: ${({ $isHidden }) =>
+    $isHidden ? "var(--light-gray)" : "var(--soft-indigo)"};
+  text-transform: capitalize;
+  padding: 5px;
+
+  &:hover {
+    color: ${({ $isHidden }) =>
+      $isHidden ? "var(--soft-indigo)" : "var(--black)"};
+  }
+`;
+
 export const BadgeContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -345,4 +379,17 @@ export const Badge = styled.div`
   height: 55px;
   border: 1px solid var(--black);
   border-radius: 50%;
+`;
+
+// Editor
+
+export const EditorElem = styled.div`
+  width: 500px;
+  height: 500px;
+  border: 1px solid red;
+`;
+
+export const ToolbarWrapper = styled.div`
+  display: flex;
+  background-color: red;
 `;
