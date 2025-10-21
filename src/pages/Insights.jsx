@@ -1,8 +1,7 @@
 import {
-  InsightsColumnOne,
-  InsightsColumnTwo,
-  InsightsJournalGraph,
-  InsightsMoodGraph,
+  DummyDiv,
+  HeadingTwo,
+  InsightsBody,
   InsightsSection,
 } from "../components/App.styled";
 import Chart from "../components/Charts";

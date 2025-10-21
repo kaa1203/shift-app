@@ -423,31 +423,20 @@ export const OptionWrapper = styled.div`
 // Insights
 
 export const InsightsSection = styled.section`
+  padding: 10px;
   flex: 1;
+`;
+
+export const InsightsBody = styled.div`
   display: flex;
-`;
+  flex-wrap: wrap;
+  gap: 20px;
 
-export const InsightsColumnOne = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 35%;
-  border-right: 1px solid var(--muted-gray);
-`;
-
-export const InsightsColumnTwo = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 65%;
-  border-right: var(--muted-gray);
-`;
-
-export const InsightsMoodGraph = styled.div`
-  flex: 1;
-  border-bottom: 1px solid var(--muted-gray);
-`;
-
-export const InsightsJournalGraph = styled.div`
-  flex: 1;
+  & > div {
+    min-height: 300px;
+    border: 1px solid red;
+    width: calc((100% - 20px) / 2);
+  }
 `;
 
 // Modal
@@ -517,23 +506,10 @@ export const DropdownWrapper = styled.div`
   position: relative;
   border: 1px solid red;
 `;
-
 export const DropdownButton = styled.button`
   display: flex;
   align-items: center;
   text-transform: capitalize;
 `;
-
-export const DropdownList = styled.ul`
-  border: 1px solid red;
-`;
-
-export const DropdownItem = styled.li`
-  cursor: pointer;
-  padding: 2px;
-
-  &:hover {
-    color: var(--off-white);
-    background-color: var(--soft-indigo);
-  }
-`;
+export const DropdownList = styled.ul``;
+export const DropdownItem = styled.li``;
