@@ -21,6 +21,10 @@ const GlobalStyle = createGlobalStyle`
  box-sizing: inherit;  
 }
 
+*:focus {
+	outline: none;
+}
+
 html {
 	height: 100%;
 	box-sizing: border-box;

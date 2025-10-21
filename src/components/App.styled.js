@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
+// General Style
 export const Container = styled.div`
   display: flex;
   max-width: 1440px;
@@ -8,6 +9,18 @@ export const Container = styled.div`
   height: 100vh;
 `;
 
+export const Section = styled.section``;
+
+export const HeadingOne = styled.h1`
+  font-weight: 600;
+`;
+export const HeadingTwo = styled.h2`
+  font-weight: 500;
+  font-size: 29px;
+`;
+export const HeadingThree = styled.h3``;
+
+// Nav Style
 export const SideNavWrapper = styled.nav`
   display: flex;
   flex-direction: column;
@@ -33,8 +46,8 @@ export const HeaderButtonWrapper = styled.div`
 export const HeaderButton = styled.button``;
 
 export const LogoWrapper = styled.div`
-  width: 130px;
-  height: 50px;
+  min-width: 80px;
+  height: 24px;
 `;
 
 export const CollapseWrapper = styled.div`
@@ -93,10 +106,7 @@ export const Main = styled.main`
   overflow: auto;
 `;
 
-export const Section = styled.section``;
-
-export const HeadingOne = styled.h1``;
-export const HeadingThree = styled.h3``;
+// Entry
 
 export const ColumnOne = styled.section`
   display: flex;
@@ -151,7 +161,7 @@ export const DummyDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 120px;
+  width: ${(props) => (props.$width ? props.$width : "120px")};
   height: auto;
   background-color: var(--muted-gray);
 `;
@@ -166,6 +176,8 @@ export const DummyPicture = styled.div`
   background-color: var(--muted-gray);
   font-size: 60px;
 `;
+
+// Profile Page
 
 export const ProfileContainer = styled.div`
   display: flex;
@@ -380,16 +392,148 @@ export const Badge = styled.div`
   border: 1px solid var(--black);
   border-radius: 50%;
 `;
+// Settings
 
-// Editor
+export const SettingsSection = styled.section`
+  padding: 10px;
 
-export const EditorElem = styled.div`
+  & h2 {
+    margin-bottom: 15px;
+  }
+`;
+
+export const SettingsBody = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-transform: capitalize;
+`;
+
+export const OptionsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+`;
+
+export const OptionWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+// Insights
+
+export const InsightsSection = styled.section`
+  flex: 1;
+  display: flex;
+`;
+
+export const InsightsColumnOne = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 35%;
+  border-right: 1px solid var(--muted-gray);
+`;
+
+export const InsightsColumnTwo = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 65%;
+  border-right: var(--muted-gray);
+`;
+
+export const InsightsMoodGraph = styled.div`
+  flex: 1;
+  border-bottom: 1px solid var(--muted-gray);
+`;
+
+export const InsightsJournalGraph = styled.div`
+  flex: 1;
+`;
+
+// Modal
+
+export const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+`;
+export const ModalWrapper = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid var(--muted-gray);
+  background-color: var(--off-white);
   width: 500px;
+  max-height: calc(98vh - 15px);
+  border-radius: 10px;
+`;
+export const ModalHeader = styled.div`
+  text-align: center;
+  color: var(--light-gray);
+  background-color: var(--soft-indigo);
+  border-radius: 8px 8px 0 0;
+  padding: 4px;
+
+  & button {
+    position: relative;
+    right: -135px;
+    &:hover {
+      color: var(--black);
+    }
+  }
+`;
+export const ModalBody = styled.div`
+  padding: 10px;
+`;
+export const ModalFooter = styled.div``;
+
+//Editor
+export const EditorWrapper = styled.div`
+  position: relative;
+  width: 800px;
   height: 500px;
   border: 1px solid red;
 `;
 
+export const EditorElem = styled.div`
+  height: 100%;
+  margin-top: 30px;
+  padding: 5px;
+`;
+
 export const ToolbarWrapper = styled.div`
+  position: absolute;
+  top: 0;
   display: flex;
-  background-color: red;
+`;
+
+// Dropdown
+export const DropdownWrapper = styled.div`
+  position: relative;
+  border: 1px solid red;
+`;
+
+export const DropdownButton = styled.button`
+  display: flex;
+  align-items: center;
+  text-transform: capitalize;
+`;
+
+export const DropdownList = styled.ul`
+  border: 1px solid red;
+`;
+
+export const DropdownItem = styled.li`
+  cursor: pointer;
+  padding: 2px;
+
+  &:hover {
+    color: var(--off-white);
+    background-color: var(--soft-indigo);
+  }
 `;

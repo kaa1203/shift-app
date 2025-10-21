@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import {
   ColumnOne,
   ContentWrapper,
@@ -20,6 +21,10 @@ import {
 } from "react-icons/lu";
 
 const EntriesList = ({ data }) => {
+  const { isFullscreen } = useSelector((state) => state.fullscreen);
+
+  if (isFullscreen) return;
+
   return (
     <ColumnOne>
       <HeaderWrapper>

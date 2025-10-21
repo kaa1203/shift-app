@@ -19,6 +19,7 @@ import {
   ProfileIconWrapper,
   ProfilePictureWrapper,
   HeadingOne,
+  HeadingTwo,
   HeadingThree,
   UserWrapper,
   ProfileBody,

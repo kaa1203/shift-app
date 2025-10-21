@@ -1,7 +1,9 @@
-import Editor from "../components/TextEditor/Editor";
+import Dropdown from "../components/Dropdown";
+import SlateEditor from "../components/TextEditor/SlateEditor";
 
 const Home = () => {
-  return <Editor />;
+  // return <SlateEditor />;
+  return <Dropdown />;
 };
 
 export default Home;

@@ -3,7 +3,6 @@ import {
   HeaderWrapper,
   HeaderButtonWrapper,
   HeaderButton,
-  Section,
   HeadingThree,
   SectionList,
   SectionItem,
@@ -19,7 +18,13 @@ import {
   LuFullscreen,
 } from "react-icons/lu";
 
+import { useDispatch } from "react-redux";
+import { setFullscreen } from "../redux/fullScreenSlice";
+import { openModal } from "../redux/modalSlice";
+
 const EntryContent = () => {
+  const dispatch = useDispatch();
+
   return (
     <ColumnTwo>
       <HeaderWrapper>
@@ -33,10 +38,10 @@ const EntryContent = () => {
         </HeaderButtonWrapper>
         <h3>August 25. 2025</h3>
         <HeaderButtonWrapper>
-          <HeaderButton>
+          <HeaderButton onClick={() => dispatch(setFullscreen())}>
             <LuFullscreen size="25" />
           </HeaderButton>
-          <HeaderButton>
+          <HeaderButton onClick={() => dispatch(openModal())}>
             <LuPlus size="25" />
           </HeaderButton>
         </HeaderButtonWrapper>
