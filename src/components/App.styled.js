@@ -1,3 +1,4 @@
+import { EditorContent } from "@tiptap/react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
@@ -26,14 +27,13 @@ export const SideNavWrapper = styled.nav`
   flex-direction: column;
   gap: 30px;
   border-right: 1px solid var(--muted-gray);
-  width: 200px;
+  max-width: 200px;
   height: 100vh;
 `;
 
 export const HeaderWrapper = styled.header`
   display: flex;
   justify-content: space-between;
-  // flex: 0 0 auto;
   padding: 8px;
   border-bottom: 1px solid var(--muted-gray);
 `;
@@ -46,20 +46,22 @@ export const HeaderButtonWrapper = styled.div`
 export const HeaderButton = styled.button``;
 
 export const LogoWrapper = styled.div`
-  min-width: 80px;
-  height: 24px;
+  min-width: 30px;
+  height: 20px;
 `;
 
 export const CollapseWrapper = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: ${({ $padding }) =>
+    $padding === true ? "center" : "start"};
   align-items: center;
+  gap: 20px;
+  padding-left: ${({ $padding }) => ($padding === true ? "0" : "25px")};
 `;
 
 export const Collapse = styled.button`
   display: inline-flex;
   align-items: center;
-  transform: rotate(180deg);
 `;
 
 export const IconWrapper = styled.div``;
@@ -89,8 +91,8 @@ export const StyledNavLink = styled(NavLink)`
   display: flex;
   align-items: center;
   gap: 15px;
-  padding: 4px 8px;
-  padding-left: 25px;
+  padding: ${({ $padding }) =>
+    $padding === true ? "4px 20px" : "4px 8px 4px 25px"};
 
   &.active {
     background-color: var(--soft-indigo);
@@ -423,20 +425,28 @@ export const OptionWrapper = styled.div`
 // Insights
 
 export const InsightsSection = styled.section`
-  padding: 10px;
   flex: 1;
+  display: flex;
 `;
 
-export const InsightsBody = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+export const InsightsColumnOne = styled.div`
+  flex: 1 1 30%;
+  border-right: 1px solid var(--muted-gray);
+`;
 
-  & > div {
-    min-height: 300px;
-    border: 1px solid red;
-    width: calc((100% - 20px) / 2);
-  }
+export const InsightsColumnTwo = styled.div`
+  flex: 1 1 70%;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const InsightsMoodGraph = styled.div`
+  flex: 1;
+  border-bottom: 1px solid var(--muted-gray);
+`;
+
+export const InsightsJournalGraph = styled.div`
+  flex: 1;
 `;
 
 // Modal
@@ -483,22 +493,51 @@ export const ModalFooter = styled.div``;
 
 //Editor
 export const EditorWrapper = styled.div`
+  display: flex;
   position: relative;
+  flex-direction: column;
   width: 800px;
   height: 500px;
   border: 1px solid red;
+  gap: 5px;
 `;
 
-export const EditorElem = styled.div`
-  height: 100%;
-  margin-top: 30px;
-  padding: 5px;
+export const StyledEditorContent = styled(EditorContent)`
+  flex: 1;
+
+  ul {
+    list-style-type: disc;
+    margin-left: 1.5em;
+    padding-left: 0;
+  }
+
+  ol {
+    list-style-type: decimal;
+    margin-left: 1.5em;
+    padding-left: 0;
+  }
+
+  li {
+    margin: 0.25em 0;
+  }
 `;
 
+// Toolbar
 export const ToolbarWrapper = styled.div`
-  position: absolute;
-  top: 0;
   display: flex;
+  gap: 4px;
+  padding: 2px;
+`;
+
+export const ToolbarButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+  border-radius: 4px;
+  color: ${({ $isActive }) => ($isActive ? "var(--soft-indigo)" : "unset")};
+  box-shadow: ${({ $isActive }) =>
+    $isActive ? "inset 0 2px 4px rgba(0, 0, 0, 0.3)" : "unset"};
 `;
 
 // Dropdown
@@ -512,4 +551,10 @@ export const DropdownButton = styled.button`
   text-transform: capitalize;
 `;
 export const DropdownList = styled.ul``;
-export const DropdownItem = styled.li``;
+export const DropdownItem = styled.li`
+  cursor: pointer;
+  &:hover {
+    background-color: var(--soft-indigo);
+    color: var(--off-white);
+  }
+`;

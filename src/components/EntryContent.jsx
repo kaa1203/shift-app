@@ -16,6 +16,7 @@ import {
   LuArrowLeft,
   LuPlus,
   LuFullscreen,
+  LuEllipsis,
 } from "react-icons/lu";
 
 import { useDispatch } from "react-redux";
@@ -40,6 +41,9 @@ const EntryContent = () => {
         <HeaderButtonWrapper>
           <HeaderButton onClick={() => dispatch(setFullscreen())}>
             <LuFullscreen size="25" />
+          </HeaderButton>
+          <HeaderButton onClick={() => dispatch(openModal())}>
+            <LuEllipsis size="25" />
           </HeaderButton>
           <HeaderButton onClick={() => dispatch(openModal())}>
             <LuPlus size="25" />

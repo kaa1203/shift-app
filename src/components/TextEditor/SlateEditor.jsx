@@ -1,5 +1,5 @@
-import { useCallback, useState } from "react";
-import { createEditor, Editor, Element, Transforms } from "slate";
+import { useCallback, useEffect, useState } from "react";
+import { createEditor, Editor } from "slate";
 import { Slate, Editable, withReact, DefaultElement } from "slate-react";
 
 import {
@@ -24,7 +24,7 @@ const buttonsArray = [
     icon: <LuStrikethrough size={20} />,
   },
   { type: "normal", name: "highlight", icon: <LuHighlighter size={20} /> },
-  { type: "normal", name: "heading1", icon: <LuHighlighter size={20} /> },
+  // { type: "normal", name: "heading1", icon: <LuHighlighter size={20} /> },
 ];
 
 const CustomEditor = {
@@ -32,6 +32,12 @@ const CustomEditor = {
     const marks = Editor.marks(editor);
 
     return marks ? marks[type] === true : false;
+  },
+  isBlockActive(editor) {
+    const [match] = Editor.nodes(editor, {
+      match: (n) => console.log(n),
+    });
+    return !!match;
   },
   toggleMark(editor, type) {
     const isActive = CustomEditor.isMarkActive(editor, type);
@@ -55,6 +61,10 @@ const SlateEditor = () => {
         return <DefaultElement {...props} />;
     }
   }, []);
+
+  useEffect(() => {
+    const { isBlockActive } = CustomEditor;
+  }, [editor.selection]);
 
   const renderLeaf = useCallback((props) => {
     return <Leaf {...props} />;

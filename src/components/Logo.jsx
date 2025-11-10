@@ -5,7 +5,6 @@ const Logo = () => {
     <LogoWrapper>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="font"
         viewBox="0 0 192.635 60"
         width="100%"
         height="100%"

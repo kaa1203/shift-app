@@ -7,7 +7,7 @@ import {
 } from "./App.styled";
 import { LuChevronDown, LuChevronUp } from "react-icons/lu";
 
-const Dropdown = () => {
+const Dropdown = ({ data, setValue }) => {
   const [isHidden, setIsHidden] = useState(true);
   const dropdownRef = useRef(null);
 
@@ -33,18 +33,22 @@ const Dropdown = () => {
     items: ["item 1", "item 2", "item 3"],
   };
 
-  const handleOnClick = () => setIsHidden(!isHidden);
+  const handleOnToggle = () => setIsHidden(!isHidden);
+
+  const handleOnClick = (e) => {
+    console.log(e.target.value);
+  };
 
   return (
     <DropdownWrapper ref={dropdownRef}>
-      <DropdownButton onClick={handleOnClick}>
+      <DropdownButton onClick={handleOnToggle}>
         {options.name}
         {isHidden ? <LuChevronDown size={20} /> : <LuChevronUp size={20} />}
       </DropdownButton>
       {!isHidden && (
         <DropdownList>
           {options.items.map((item, idx) => (
-            <DropdownItem key={idx} onClick={handleOnClick}>
+            <DropdownItem key={idx} onClick={handleOnToggle}>
               {item}
             </DropdownItem>
           ))}

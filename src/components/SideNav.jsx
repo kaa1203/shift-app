@@ -7,7 +7,7 @@ import {
   SideNavWrapper,
 } from "./App.styled";
 
-import { GoSidebarCollapse } from "react-icons/go";
+import { GoSidebarCollapse, GoSidebarExpand } from "react-icons/go";
 import Logo from "./Logo";
 
 import { NavLink } from "react-router-dom";
@@ -27,92 +27,112 @@ import {
   LuUser,
 } from "react-icons/lu";
 
+import { useState } from "react";
+
 const SideNav = () => {
+  const [isMenuToggled, setIsMenuToggled] = useState(false);
+
+  const navOneItems = [
+    {
+      name: "all entries",
+      to: "/entries",
+      icon: <LuClipboardList size={28} />,
+    },
+    {
+      name: "my journal",
+      to: "/journals",
+      icon: <LuNotebook size={28} />,
+    },
+    {
+      name: "my goals",
+      to: "/goals",
+      icon: <LuTarget size={28} />,
+    },
+    {
+      name: "my ideas",
+      to: "/ideas",
+      icon: <LuLightbulb size={28} />,
+    },
+    {
+      name: "mental health",
+      to: "/mental-health",
+      icon: <LuHeartPulse size={28} />,
+    },
+    {
+      name: "tags",
+      to: "/tags",
+      icon: <LuTags size={28} />,
+    },
+    {
+      name: "favorites",
+      to: "/favorites",
+      icon: <LuStar size={28} />,
+    },
+    {
+      name: "archive",
+      to: "/archive",
+      icon: <LuArchive size={28} />,
+    },
+  ];
+
+  const navTwoItems = [
+    {
+      name: "insights",
+      to: "/insights",
+      icon: <LuChartBar size={28} />,
+    },
+    {
+      name: "reminders",
+      to: "/reminders",
+      icon: <LuBell size={28} />,
+    },
+    {
+      name: "settings",
+      to: "/settings",
+      icon: <LuSettings size={28} />,
+    },
+    {
+      name: "profile",
+      to: "/profile",
+      icon: <LuUser size={28} />,
+    },
+  ];
+
   return (
     <SideNavWrapper>
-      <CollapseWrapper>
-        <Collapse>
-          <GoSidebarCollapse size="32" />
+      <CollapseWrapper $padding={isMenuToggled} $justify={isMenuToggled}>
+        <Collapse onClick={() => setIsMenuToggled(!isMenuToggled)}>
+          {!isMenuToggled ? (
+            <GoSidebarExpand size="35" />
+          ) : (
+            <GoSidebarCollapse size="35" />
+          )}
         </Collapse>
-        <NavLink to="/" end>
-          <Logo />
-        </NavLink>
+        {!isMenuToggled && (
+          <NavLink to="/" end>
+            <Logo />
+          </NavLink>
+        )}
       </CollapseWrapper>
       <NavMenu>
-        <NavItem>
-          <StyledNavLink to="/entries">
-            <LuClipboardList size="24" />
-            All entries
-          </StyledNavLink>
-        </NavItem>
-        <NavItem>
-          <StyledNavLink to="/journals">
-            <LuNotebook size="24" />
-            My Journal
-          </StyledNavLink>
-        </NavItem>
-        <NavItem>
-          <StyledNavLink to="/goals">
-            <LuTarget size="24" />
-            My Goals
-          </StyledNavLink>
-        </NavItem>
-        <NavItem>
-          <StyledNavLink to="/ideas">
-            <LuLightbulb size="24" />
-            Ideas
-          </StyledNavLink>
-        </NavItem>
-        <NavItem>
-          <StyledNavLink to="/mental-health">
-            <LuHeartPulse size="24" />
-            Mental Health
-          </StyledNavLink>
-        </NavItem>
-        <NavItem>
-          <StyledNavLink to="/tags">
-            <LuTags size="24" />
-            Tags
-          </StyledNavLink>
-        </NavItem>
-        <NavItem>
-          <StyledNavLink to="/favorites">
-            <LuStar size="24" />
-            Favorites
-          </StyledNavLink>
-        </NavItem>
-        <NavItem>
-          <StyledNavLink to="/archive">
-            <LuArchive size="24" />
-            Archive
-          </StyledNavLink>
-        </NavItem>
+        {navOneItems.map((item, idx) => (
+          <NavItem key={idx}>
+            <StyledNavLink to={item.to} $padding={isMenuToggled}>
+              {item.icon}
+              {!isMenuToggled && item.name}
+            </StyledNavLink>
+          </NavItem>
+        ))}
       </NavMenu>
       <NavMenu $margin="bottom">
-        <NavItem>
-          <StyledNavLink to="insights">
-            <LuChartBar size="24" />
-            Insights
-          </StyledNavLink>
-        </NavItem>
-        <NavItem>
-          <StyledNavLink to="reminders">
-            <LuBell size="24" />
-            Reminders
-          </StyledNavLink>
-        </NavItem>
-        <NavItem>
-          <StyledNavLink to="settings">
-            <LuSettings size="24" />
-            Settings
-          </StyledNavLink>
-        </NavItem>
-        <NavItem>
-          <StyledNavLink to="profile">
-            <LuUser size="24" />
-            Profile
-          </StyledNavLink>
-        </NavItem>
+        {navTwoItems.map((item, idx) => (
+          <NavItem key={idx}>
+            <StyledNavLink to={item.to} $padding={isMenuToggled}>
+              {item.icon}
+              {!isMenuToggled && item.name}
+            </StyledNavLink>
+          </NavItem>
+        ))}
       </NavMenu>
     </SideNavWrapper>
   );
