@@ -86,6 +86,16 @@ button {
 .maskIsHidden {
 	background: var(--entry-mask)
 }
+
+.editor-image-container {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row; 
+}
+
+.editor-image-container img {
+
+}
 `;
 
 export default GlobalStyle;

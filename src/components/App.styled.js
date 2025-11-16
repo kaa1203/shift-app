@@ -496,8 +496,8 @@ export const EditorWrapper = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
-  width: 800px;
-  height: 500px;
+  flex: 1;
+  height: 100vh;
   border: 1px solid red;
   gap: 5px;
 `;
@@ -525,6 +525,7 @@ export const StyledEditorContent = styled(EditorContent)`
 // Toolbar
 export const ToolbarWrapper = styled.div`
   display: flex;
+  align-items: center;
   gap: 4px;
   padding: 2px;
 `;
@@ -539,6 +540,15 @@ export const ToolbarButton = styled.button`
   box-shadow: ${({ $isActive }) =>
     $isActive ? "inset 0 2px 4px rgba(0, 0, 0, 0.3)" : "unset"};
 `;
+
+export const ToolbarLabel = styled.label`
+  &:hover {
+    color: var(--soft-indigo);
+    cursor: pointer;
+  }
+`;
+
+export const ToolbarInput = styled.input``;
 
 // Dropdown
 export const DropdownWrapper = styled.div`

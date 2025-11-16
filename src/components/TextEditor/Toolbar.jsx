@@ -4,7 +4,10 @@ import {
   LuAlignLeft,
   LuAlignRight,
   LuBold,
+  LuHeading1,
+  LuHeading2,
   LuHighlighter,
+  LuImage,
   LuItalic,
   LuList,
   LuListOrdered,
@@ -12,9 +15,13 @@ import {
   LuStrikethrough,
   LuUnderline,
 } from "react-icons/lu";
-import { ToolbarButton, ToolbarWrapper } from "../App.styled";
-import Dropdown from "../Dropdown";
-import TextAlign from "@tiptap/extension-text-align";
+
+import {
+  ToolbarButton,
+  ToolbarInput,
+  ToolbarLabel,
+  ToolbarWrapper,
+} from "../App.styled";
 
 const Toolbar = ({ editor }) => {
   const buttonArr = [
@@ -22,6 +29,18 @@ const Toolbar = ({ editor }) => {
     { type: "format", name: "italic", icon: <LuItalic size={24} /> },
     { type: "format", name: "underline", icon: <LuUnderline size={24} /> },
     { type: "format", name: "strike", icon: <LuStrikethrough size={24} /> },
+    {
+      type: "format",
+      name: "heading1",
+      icon: <LuHeading1 size={24} />,
+      level: 1,
+    },
+    {
+      type: "format",
+      name: "heading2",
+      icon: <LuHeading2 size={24} />,
+      level: 2,
+    },
     { type: "align", name: "alignLeft", icon: <LuAlignLeft size={24} /> },
     { type: "align", name: "alignCenter", icon: <LuAlignCenter size={24} /> },
     { type: "align", name: "alignRight", icon: <LuAlignRight size={24} /> },
@@ -30,8 +49,8 @@ const Toolbar = ({ editor }) => {
       name: "alignJustify",
       icon: <LuAlignJustify size={24} />,
     },
-    { type: "format", name: "orderedList", icon: <LuListOrdered size={24} /> },
-    { type: "format", name: "bulletList", icon: <LuList size={24} /> },
+    { type: "list", name: "orderedList", icon: <LuListOrdered size={24} /> },
+    { type: "list", name: "bulletList", icon: <LuList size={24} /> },
     { type: "format", name: "highlight", icon: <LuHighlighter size={24} /> },
     {
       type: "format",
@@ -40,52 +59,85 @@ const Toolbar = ({ editor }) => {
     },
   ];
 
-  const isActive = (format) => {
-    return typeof format === "string"
-      ? editor.isActive(format)
-      : editor.isActive(format);
+  const isActive = (format, level) => {
+    if (format.startsWith("heading"))
+      return editor.isActive("heading", { level });
+
+    if (format.startsWith("align")) {
+      const name = format.slice(5).toLowerCase();
+
+      return editor.isActive({ textAlign: name });
+    }
+
+    return editor.isActive(format);
   };
 
   const capitalize = (string) =>
     string.charAt(0).toUpperCase() + string.slice(1);
 
-  const handleOnClick = (name) => {
+  const handleOnClick = (name, level) => {
     let defaultChain = editor.chain().focus();
 
-    if (name.startsWith("align")) {
+    if (name.startsWith("align"))
       return defaultChain
         .setTextAlign(name.replace("align", "").toLowerCase())
         .run();
-    }
 
-    if (name === "bulletList") {
-      return defaultChain.toggleBulletList().run();
-    }
+    if (name.startsWith("heading"))
+      return defaultChain.toggleHeading({ level }).run();
 
-    if (name === "orderedList") {
-      return defaultChain.toggleOrderedList().run();
-    }
+    if (name === "bulletList") return defaultChain.toggleBulletList().run();
+
+    if (name === "orderedList") return defaultChain.toggleOrderedList().run();
 
     if (name === "highlight") return defaultChain.toggleHighlight().run();
 
     return defaultChain[`toggle${capitalize(name)}`]().run();
   };
 
+  const handleImageUpload = async (e) => {
+    const files = Array.from(e.target.files);
+
+    const readAsDataUrl = (file) =>
+      new Promise((res) => {
+        const reader = new FileReader();
+        reader.onload = () => res(reader.result);
+        reader.readAsDataURL(file);
+      });
+
+    const images = await Promise.all(files.map((file) => readAsDataUrl(file)));
+
+    editor
+      .chain()
+      .focus()
+      .insertContent({
+        type: "imageContainer",
+        content: images.map((src) => ({ type: "image", attrs: { src } })),
+      })
+      .run();
+  };
+
   return (
     <ToolbarWrapper>
-      {buttonArr.map(({ type, name, icon }, idx) => (
+      {buttonArr.map(({ type, name, icon, level }, idx) => (
         <ToolbarButton
           key={idx}
-          onClick={() => handleOnClick(name)}
-          $isActive={
-            type === "format"
-              ? isActive(name)
-              : editor.isActive({ textAlign: name })
-          }
+          onClick={() => handleOnClick(name, level)}
+          $isActive={isActive(name, level)}
         >
           {icon}
         </ToolbarButton>
       ))}
+      <ToolbarLabel>
+        <LuImage size={24} />
+        <ToolbarInput
+          type="file"
+          accept="image/*"
+          multiple
+          style={{ display: "none" }}
+          onChange={handleImageUpload}
+        />
+      </ToolbarLabel>
     </ToolbarWrapper>
   );
 };

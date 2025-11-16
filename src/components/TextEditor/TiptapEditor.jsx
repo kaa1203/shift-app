@@ -1,11 +1,13 @@
-import { useEditor } from "@tiptap/react";
+import { mergeAttributes, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import TextAlign from "@tiptap/extension-text-align";
 import Highlight from "@tiptap/extension-highlight";
+import Image from "@tiptap/extension-image";
 
 import { EditorWrapper, StyledEditorContent } from "../App.styled";
 import Toolbar from "./Toolbar";
 import { useEffect, useRef, useState } from "react";
+import imageContainer from "./ImageGroup";
 
 const Editor = () => {
   const [isFocus, setIsFocus] = useState(false);
@@ -13,10 +15,26 @@ const Editor = () => {
 
   const editorRef = useRef(null);
 
+  const CustomImage = Image.extend({
+    name: "customImage",
+
+    renderHTML({ HTMLAttributes }) {
+      return [
+        "img",
+        mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
+          class: "editor-image",
+        }),
+      ];
+    },
+  });
+
   const editor = useEditor({
     extensions: [
       StarterKit.configure({ bulletList: true, orderedList: true }),
       TextAlign.configure({ types: ["heading", "paragraph"] }),
+      CustomImage,
+      Image.configure({ inline: false, allowBase64: true }),
+      imageContainer,
       Highlight,
     ],
     content: "<p>Hello world!</p>",
