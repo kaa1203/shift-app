@@ -1,40 +1,25 @@
-import { mergeAttributes, useEditor } from "@tiptap/react";
+import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import TextAlign from "@tiptap/extension-text-align";
 import Highlight from "@tiptap/extension-highlight";
-import Image from "@tiptap/extension-image";
+
+import { useEffect, useRef, useState } from "react";
 
 import { EditorWrapper, StyledEditorContent } from "../App.styled";
 import Toolbar from "./Toolbar";
-import { useEffect, useRef, useState } from "react";
-import imageContainer from "./ImageGroup";
+import ImageGroup from "./ImageGroup";
 
 const Editor = () => {
   const [isFocus, setIsFocus] = useState(false);
   const [_, setRender] = useState(0);
+  const [images, setImages] = useState([]);
 
   const editorRef = useRef(null);
-
-  const CustomImage = Image.extend({
-    name: "customImage",
-
-    renderHTML({ HTMLAttributes }) {
-      return [
-        "img",
-        mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
-          class: "editor-image",
-        }),
-      ];
-    },
-  });
 
   const editor = useEditor({
     extensions: [
       StarterKit.configure({ bulletList: true, orderedList: true }),
       TextAlign.configure({ types: ["heading", "paragraph"] }),
-      CustomImage,
-      Image.configure({ inline: false, allowBase64: true }),
-      imageContainer,
       Highlight,
     ],
     content: "<p>Hello world!</p>",
@@ -75,11 +60,14 @@ const Editor = () => {
 
   return (
     <EditorWrapper ref={editorRef} onClick={() => setIsFocus(true)}>
-      {isFocus && <Toolbar editor={editor} />}
+      {(isFocus || images.length !== 0) && (
+        <Toolbar editor={editor} setImages={setImages} />
+      )}
       <StyledEditorContent
         editor={editor}
         onClick={() => editor.chain().focus().run()}
       />
+      <ImageGroup images={images} setImages={setImages} />
     </EditorWrapper>
   );
 };

@@ -22,8 +22,9 @@ import {
   ToolbarLabel,
   ToolbarWrapper,
 } from "../App.styled";
+import { handleImageUpload } from "../../utils/handleImageUpload";
 
-const Toolbar = ({ editor }) => {
+const Toolbar = ({ editor, setImages }) => {
   const buttonArr = [
     { type: "format", name: "bold", icon: <LuBold size={24} /> },
     { type: "format", name: "italic", icon: <LuItalic size={24} /> },
@@ -95,28 +96,6 @@ const Toolbar = ({ editor }) => {
     return defaultChain[`toggle${capitalize(name)}`]().run();
   };
 
-  const handleImageUpload = async (e) => {
-    const files = Array.from(e.target.files);
-
-    const readAsDataUrl = (file) =>
-      new Promise((res) => {
-        const reader = new FileReader();
-        reader.onload = () => res(reader.result);
-        reader.readAsDataURL(file);
-      });
-
-    const images = await Promise.all(files.map((file) => readAsDataUrl(file)));
-
-    editor
-      .chain()
-      .focus()
-      .insertContent({
-        type: "imageContainer",
-        content: images.map((src) => ({ type: "image", attrs: { src } })),
-      })
-      .run();
-  };
-
   return (
     <ToolbarWrapper>
       {buttonArr.map(({ type, name, icon, level }, idx) => (
@@ -134,8 +113,7 @@ const Toolbar = ({ editor }) => {
           type="file"
           accept="image/*"
           multiple
-          style={{ display: "none" }}
-          onChange={handleImageUpload}
+          onChange={(e) => handleImageUpload(e, setImages)}
         />
       </ToolbarLabel>
     </ToolbarWrapper>

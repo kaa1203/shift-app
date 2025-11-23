@@ -460,6 +460,7 @@ export const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 9999;
 `;
+
 export const ModalWrapper = styled.div`
   position: absolute;
   top: 50%;
@@ -471,6 +472,7 @@ export const ModalWrapper = styled.div`
   max-height: calc(98vh - 15px);
   border-radius: 10px;
 `;
+
 export const ModalHeader = styled.div`
   text-align: center;
   color: var(--light-gray);
@@ -492,6 +494,7 @@ export const ModalBody = styled.div`
 export const ModalFooter = styled.div``;
 
 //Editor
+
 export const EditorWrapper = styled.div`
   display: flex;
   position: relative;
@@ -500,10 +503,12 @@ export const EditorWrapper = styled.div`
   height: 100vh;
   border: 1px solid red;
   gap: 5px;
+  overflow: hidden;
 `;
 
 export const StyledEditorContent = styled(EditorContent)`
   flex: 1;
+  overflow: auto;
 
   ul {
     list-style-type: disc;
@@ -523,6 +528,7 @@ export const StyledEditorContent = styled(EditorContent)`
 `;
 
 // Toolbar
+
 export const ToolbarWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -548,9 +554,58 @@ export const ToolbarLabel = styled.label`
   }
 `;
 
-export const ToolbarInput = styled.input``;
+export const ToolbarInput = styled.input`
+  display: none;
+`;
+
+// Image Group
+
+export const ImageContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-height: 250px;
+  overflow-x: auto;
+  padding: 6px;
+  border: 1px solid blue;
+`;
+
+export const ImageWrapper = styled.div`
+  position: relative;
+  user-select: none;
+
+  & div {
+    position: absolute;
+    top: 2px;
+    right: 5px;
+    color: var(--off-white);
+
+    &:hover {
+      cursor: pointer;
+      color: var(--soft-indigo);
+    }
+  }
+`;
+
+export const Image = styled.img`
+  width: 150px;
+  height: 90px;
+`;
+
+export const ImageLabel = styled.label`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid red;
+  cursor: pointer;
+`;
+
+export const ImageInput = styled.input`
+  display: none;
+`;
 
 // Dropdown
+
 export const DropdownWrapper = styled.div`
   position: relative;
   border: 1px solid red;
@@ -561,6 +616,7 @@ export const DropdownButton = styled.button`
   text-transform: capitalize;
 `;
 export const DropdownList = styled.ul``;
+
 export const DropdownItem = styled.li`
   cursor: pointer;
   &:hover {

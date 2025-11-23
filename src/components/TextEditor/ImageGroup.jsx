@@ -1,15 +1,44 @@
-import { Node } from "@tiptap/core";
+import { LuCross, LuPlus, LuX } from "react-icons/lu";
+import {
+  Image,
+  ImageInput,
+  ImageLabel,
+  ImageContainer,
+  ImageWrapper,
+  IconWrapper,
+} from "../App.styled";
+import { handleImageUpload } from "../../utils/handleImageUpload";
 
-const imageContainer = Node.create({
-  name: "imageContainer",
-  group: "block",
-  content: "image+",
-  parseHTML() {
-    return [{ tag: "div.editor-image-container" }];
-  },
-  renderHTML({ HTMLAttributes }) {
-    return ["div", { class: "editor-image-container", ...HTMLAttributes }, 0];
-  },
-});
+const ImageGroup = ({ images, setImages }) => {
+  if (images.length === 0) return;
 
-export default imageContainer;
+  const handleOnClick = (idx) => {
+    setImages((prevState) => prevState.filter((_, id) => id !== idx));
+  };
+
+  return (
+    <ImageContainer>
+      {images.length !== 0 && (
+        <ImageLabel>
+          <LuPlus size={36} />
+          <ImageInput
+            type="file"
+            accept="image/*"
+            multiple
+            onChange={(e) => handleImageUpload(e, setImages)}
+          />
+        </ImageLabel>
+      )}
+      {images.map((src, idx) => (
+        <ImageWrapper key={idx}>
+          <IconWrapper onClick={() => handleOnClick(idx)}>
+            <LuX size={20} />
+          </IconWrapper>
+          <Image src={src} alt="image" />
+        </ImageWrapper>
+      ))}
+    </ImageContainer>
+  );
+};
+
+export default ImageGroup;
