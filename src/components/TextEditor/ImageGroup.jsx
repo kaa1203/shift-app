@@ -1,4 +1,4 @@
-import { LuCross, LuPlus, LuX } from "react-icons/lu";
+import { LuImagePlus, LuX } from "react-icons/lu";
 import {
   Image,
   ImageInput,
@@ -20,7 +20,7 @@ const ImageGroup = ({ images, setImages }) => {
     <ImageContainer>
       {images.length !== 0 && (
         <ImageLabel>
-          <LuPlus size={36} />
+          <LuImagePlus size={36} />
           <ImageInput
             type="file"
             accept="image/*"

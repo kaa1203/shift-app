@@ -45,7 +45,11 @@ const EntryContent = () => {
           <HeaderButton onClick={() => dispatch(openModal())}>
             <LuEllipsis size="25" />
           </HeaderButton>
-          <HeaderButton onClick={() => dispatch(openModal())}>
+          <HeaderButton
+            onClick={() =>
+              dispatch(openModal({ title: "add entry", type: "addEntry" }))
+            }
+          >
             <LuPlus size="25" />
           </HeaderButton>
         </HeaderButtonWrapper>

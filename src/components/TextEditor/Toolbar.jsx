@@ -26,37 +26,37 @@ import { handleImageUpload } from "../../utils/handleImageUpload";
 
 const Toolbar = ({ editor, setImages }) => {
   const buttonArr = [
-    { type: "format", name: "bold", icon: <LuBold size={24} /> },
-    { type: "format", name: "italic", icon: <LuItalic size={24} /> },
-    { type: "format", name: "underline", icon: <LuUnderline size={24} /> },
-    { type: "format", name: "strike", icon: <LuStrikethrough size={24} /> },
+    { type: "format", name: "bold", icon: <LuBold size={28} /> },
+    { type: "format", name: "italic", icon: <LuItalic size={28} /> },
+    { type: "format", name: "underline", icon: <LuUnderline size={28} /> },
+    { type: "format", name: "strike", icon: <LuStrikethrough size={28} /> },
     {
       type: "format",
       name: "heading1",
-      icon: <LuHeading1 size={24} />,
+      icon: <LuHeading1 size={28} />,
       level: 1,
     },
     {
       type: "format",
       name: "heading2",
-      icon: <LuHeading2 size={24} />,
+      icon: <LuHeading2 size={28} />,
       level: 2,
     },
-    { type: "align", name: "alignLeft", icon: <LuAlignLeft size={24} /> },
-    { type: "align", name: "alignCenter", icon: <LuAlignCenter size={24} /> },
-    { type: "align", name: "alignRight", icon: <LuAlignRight size={24} /> },
+    { type: "align", name: "alignLeft", icon: <LuAlignLeft size={28} /> },
+    { type: "align", name: "alignCenter", icon: <LuAlignCenter size={28} /> },
+    { type: "align", name: "alignRight", icon: <LuAlignRight size={28} /> },
     {
       type: "align",
       name: "alignJustify",
-      icon: <LuAlignJustify size={24} />,
+      icon: <LuAlignJustify size={28} />,
     },
-    { type: "list", name: "orderedList", icon: <LuListOrdered size={24} /> },
-    { type: "list", name: "bulletList", icon: <LuList size={24} /> },
-    { type: "format", name: "highlight", icon: <LuHighlighter size={24} /> },
+    { type: "list", name: "orderedList", icon: <LuListOrdered size={28} /> },
+    { type: "list", name: "bulletList", icon: <LuList size={28} /> },
+    { type: "format", name: "highlight", icon: <LuHighlighter size={28} /> },
     {
       type: "format",
       name: "blockquote",
-      icon: <LuMessageSquareQuote size={24} />,
+      icon: <LuMessageSquareQuote size={28} />,
     },
   ];
 
@@ -108,7 +108,7 @@ const Toolbar = ({ editor, setImages }) => {
         </ToolbarButton>
       ))}
       <ToolbarLabel>
-        <LuImage size={24} />
+        <LuImage size={28} />
         <ToolbarInput
           type="file"
           accept="image/*"

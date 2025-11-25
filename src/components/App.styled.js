@@ -468,29 +468,50 @@ export const ModalWrapper = styled.div`
   transform: translate(-50%, -50%);
   border: 1px solid var(--muted-gray);
   background-color: var(--off-white);
-  width: 500px;
+  width: 75vw;
   max-height: calc(98vh - 15px);
   border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 `;
 
 export const ModalHeader = styled.div`
-  text-align: center;
+  text-transform: capitalize;
   color: var(--light-gray);
   background-color: var(--soft-indigo);
   border-radius: 8px 8px 0 0;
-  padding: 4px;
+  padding: 8px;
+  position: relative;
 
   & button {
-    position: relative;
-    right: -135px;
+    position: absolute;
+    top: 7px;
+    right: 8px;
+
     &:hover {
       color: var(--black);
     }
   }
 `;
+
+export const ModalTitle = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+`;
+
 export const ModalBody = styled.div`
   padding: 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
 `;
+
 export const ModalFooter = styled.div``;
 
 //Editor
@@ -500,7 +521,6 @@ export const EditorWrapper = styled.div`
   position: relative;
   flex-direction: column;
   flex: 1;
-  height: 100vh;
   border: 1px solid red;
   gap: 5px;
   overflow: hidden;
@@ -564,7 +584,8 @@ export const ImageContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  max-height: 250px;
+  height: 120px;
+  flex-shrink: 0;
   overflow-x: auto;
   padding: 6px;
   border: 1px solid blue;
