@@ -16,44 +16,107 @@ import {
   LuArrowLeft,
   LuPlus,
   LuFullscreen,
-  LuEllipsis,
+  LuPencil,
+  LuTrash,
+  LuCheck,
+  LuX,
 } from "react-icons/lu";
 
 import { useDispatch } from "react-redux";
 import { setFullscreen } from "../redux/fullScreenSlice";
 import { openModal } from "../redux/modalSlice";
+import Dropdown from "./Dropdown";
+import { useState } from "react";
 
 const EntryContent = () => {
+  const [isEditing, setIsEditing] = useState(false);
   const dispatch = useDispatch();
 
-  return (
-    <ColumnTwo>
+  const handleOnClick = (e) => {
+    const type = e.target.closest("li").innerText.toLowerCase();
+
+    if (type === "edit") {
+      setIsEditing(true);
+      return;
+    }
+
+    return dispatch(openModal({ title: "delete entry *entry number* " }));
+  };
+
+  const dropdownData = {
+    type: "ellipsis",
+    items: [
+      {
+        content: (
+          <>
+            <LuPencil size={20} />
+            edit
+          </>
+        ),
+        fn: handleOnClick,
+      },
+      {
+        content: (
+          <>
+            <LuTrash size={20} />
+            delete
+          </>
+        ),
+        fn: handleOnClick,
+      },
+    ],
+  };
+
+  const GenerateHeader = () => {
+    if (!isEditing)
+      return (
+        <HeaderWrapper>
+          <HeaderButtonWrapper>
+            <HeaderButton>
+              <LuArrowLeft size="25" />
+            </HeaderButton>
+            <HeaderButton>
+              <LuArrowRight size="25" />
+            </HeaderButton>
+          </HeaderButtonWrapper>
+          <h3>August 25. 2025</h3>
+          <HeaderButtonWrapper>
+            <HeaderButton onClick={() => dispatch(setFullscreen())}>
+              <LuFullscreen size="25" />
+            </HeaderButton>
+            <Dropdown data={dropdownData} />
+            <HeaderButton
+              onClick={() =>
+                dispatch(
+                  openModal({
+                    title: "add entry",
+                    type: "addEntry",
+                  })
+                )
+              }
+            >
+              <LuPlus size="25" />
+            </HeaderButton>
+          </HeaderButtonWrapper>
+        </HeaderWrapper>
+      );
+    return (
       <HeaderWrapper>
         <HeaderButtonWrapper>
           <HeaderButton>
-            <LuArrowLeft size="25" />
+            <LuCheck size="25" />
           </HeaderButton>
           <HeaderButton>
-            <LuArrowRight size="25" />
-          </HeaderButton>
-        </HeaderButtonWrapper>
-        <h3>August 25. 2025</h3>
-        <HeaderButtonWrapper>
-          <HeaderButton onClick={() => dispatch(setFullscreen())}>
-            <LuFullscreen size="25" />
-          </HeaderButton>
-          <HeaderButton onClick={() => dispatch(openModal())}>
-            <LuEllipsis size="25" />
-          </HeaderButton>
-          <HeaderButton
-            onClick={() =>
-              dispatch(openModal({ title: "add entry", type: "addEntry" }))
-            }
-          >
-            <LuPlus size="25" />
+            <LuX size="25" />
           </HeaderButton>
         </HeaderButtonWrapper>
       </HeaderWrapper>
+    );
+  };
+
+  return (
+    <ColumnTwo>
+      {GenerateHeader()}
       <ColumnTwoSection>
         <Article>
           <h3>Lorem ipsum dolor sit.</h3>

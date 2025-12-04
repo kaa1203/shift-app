@@ -18,11 +18,40 @@ import {
 
 import {
   ToolbarButton,
+  ToolbarButtonWrapper,
   ToolbarInput,
   ToolbarLabel,
   ToolbarWrapper,
 } from "../App.styled";
 import { handleImageUpload } from "../../utils/handleImageUpload";
+
+const MergedButtons = (buttons) => {
+  return Object.values(buttons).reduce((acc, btn) => {
+    const { type, ...rest } = btn;
+
+    if (!acc[type]) acc[type] = [];
+
+    acc[type].push(rest);
+    return acc;
+  }, {});
+};
+
+const GenerateButtons = (btns, isActive, handleOnClick) => {
+  const buttons = MergedButtons(btns);
+  return Object.entries(buttons).map(([key, value]) => (
+    <ToolbarButtonWrapper key={key}>
+      {value.map(({ name, icon, level }) => (
+        <ToolbarButton
+          key={name}
+          onClick={() => handleOnClick(name, level)}
+          $isActive={isActive(name, level)}
+        >
+          {icon}
+        </ToolbarButton>
+      ))}
+    </ToolbarButtonWrapper>
+  ));
+};
 
 const Toolbar = ({ editor, setImages }) => {
   const buttonArr = [
@@ -31,13 +60,13 @@ const Toolbar = ({ editor, setImages }) => {
     { type: "format", name: "underline", icon: <LuUnderline size={28} /> },
     { type: "format", name: "strike", icon: <LuStrikethrough size={28} /> },
     {
-      type: "format",
+      type: "format2",
       name: "heading1",
       icon: <LuHeading1 size={28} />,
       level: 1,
     },
     {
-      type: "format",
+      type: "format2",
       name: "heading2",
       icon: <LuHeading2 size={28} />,
       level: 2,
@@ -52,9 +81,9 @@ const Toolbar = ({ editor, setImages }) => {
     },
     { type: "list", name: "orderedList", icon: <LuListOrdered size={28} /> },
     { type: "list", name: "bulletList", icon: <LuList size={28} /> },
-    { type: "format", name: "highlight", icon: <LuHighlighter size={28} /> },
+    { type: "format2", name: "highlight", icon: <LuHighlighter size={28} /> },
     {
-      type: "format",
+      type: "format2",
       name: "blockquote",
       icon: <LuMessageSquareQuote size={28} />,
     },
@@ -79,10 +108,13 @@ const Toolbar = ({ editor, setImages }) => {
   const handleOnClick = (name, level) => {
     let defaultChain = editor.chain().focus();
 
-    if (name.startsWith("align"))
-      return defaultChain
-        .setTextAlign(name.replace("align", "").toLowerCase())
-        .run();
+    if (name.startsWith("align")) {
+      const current = editor.getAttributes("paragraph").textAlign;
+      const align = name.replace("align", "").toLowerCase();
+
+      if (current === align) return defaultChain.setTextAlign("left").run();
+      return defaultChain.setTextAlign(align).run();
+    }
 
     if (name.startsWith("heading"))
       return defaultChain.toggleHeading({ level }).run();
@@ -98,7 +130,7 @@ const Toolbar = ({ editor, setImages }) => {
 
   return (
     <ToolbarWrapper>
-      {buttonArr.map(({ type, name, icon, level }, idx) => (
+      {/* {buttonArr.map(({ type, name, icon, level }, idx) => (
         <ToolbarButton
           key={idx}
           onClick={() => handleOnClick(name, level)}
@@ -106,7 +138,8 @@ const Toolbar = ({ editor, setImages }) => {
         >
           {icon}
         </ToolbarButton>
-      ))}
+      ))} */}
+      {GenerateButtons(buttonArr, isActive, handleOnClick)}
       <ToolbarLabel>
         <LuImage size={28} />
         <ToolbarInput

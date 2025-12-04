@@ -468,7 +468,8 @@ export const ModalWrapper = styled.div`
   transform: translate(-50%, -50%);
   border: 1px solid var(--muted-gray);
   background-color: var(--off-white);
-  width: 75vw;
+  width: 70vw;
+  min-height: 60vh;
   max-height: calc(98vh - 15px);
   border-radius: 10px;
 
@@ -512,7 +513,21 @@ export const ModalBody = styled.div`
   overflow: hidden;
 `;
 
-export const ModalFooter = styled.div``;
+export const ModalFooter = styled.div`
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+
+  & button {
+    background-color: var(--soft-indigo);
+    color: var(--off-white);
+    text-align: center;
+    padding: 4px;
+    border-radius: 4px;
+    flex: 0 0 80%;
+    text-transform: capitalize;
+  }
+`;
 
 //Editor
 
@@ -529,6 +544,7 @@ export const EditorWrapper = styled.div`
 export const StyledEditorContent = styled(EditorContent)`
   flex: 1;
   overflow: auto;
+  padding: 0 4px;
 
   ul {
     list-style-type: disc;
@@ -551,9 +567,15 @@ export const StyledEditorContent = styled(EditorContent)`
 
 export const ToolbarWrapper = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 4px;
+  gap: 24px;
   padding: 2px;
+`;
+
+export const ToolbarButtonWrapper = styled.div`
+  display: flex;
+  gap: 10px;
 `;
 
 export const ToolbarButton = styled.button`
@@ -629,16 +651,27 @@ export const ImageInput = styled.input`
 
 export const DropdownWrapper = styled.div`
   position: relative;
-  border: 1px solid red;
 `;
 export const DropdownButton = styled.button`
   display: flex;
   align-items: center;
   text-transform: capitalize;
 `;
-export const DropdownList = styled.ul``;
+export const DropdownList = styled.ul`
+  position: absolute;
+  top: 80%;
+  left: -90%;
+  background: var(--off-white);
+  border: 1px solid grey;
+  padding: 4px;
+`;
 
 export const DropdownItem = styled.li`
+  display: flex;
+  align-items: center;
+  text-transform: capitalize;
+  padding: 4px 0;
+  gap: 5px;
   cursor: pointer;
   &:hover {
     background-color: var(--soft-indigo);

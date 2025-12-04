@@ -5,9 +5,9 @@ import {
   DropdownList,
   DropdownWrapper,
 } from "./App.styled";
-import { LuChevronDown, LuChevronUp } from "react-icons/lu";
+import { LuChevronDown, LuChevronUp, LuEllipsis } from "react-icons/lu";
 
-const Dropdown = ({ data, setValue }) => {
+const Dropdown = ({ data }, setValue) => {
   const [isHidden, setIsHidden] = useState(true);
   const dropdownRef = useRef(null);
 
@@ -28,28 +28,44 @@ const Dropdown = ({ data, setValue }) => {
     };
   }, []);
 
-  const options = {
-    name: "button",
-    items: ["item 1", "item 2", "item 3"],
-  };
-
   const handleOnToggle = () => setIsHidden(!isHidden);
 
   const handleOnClick = (e) => {
     console.log(e.target.value);
   };
 
+  const GenerateButton = (options) => {
+    const { type, name } = options;
+
+    if (type === "default")
+      return (
+        <DropdownButton onClick={handleOnToggle}>
+          {name}
+          {isHidden ? <LuChevronDown size={20} /> : <LuChevronUp size={20} />}
+        </DropdownButton>
+      );
+
+    return (
+      <DropdownButton onClick={handleOnToggle}>
+        <LuEllipsis size={25} />
+      </DropdownButton>
+    );
+  };
+
   return (
     <DropdownWrapper ref={dropdownRef}>
-      <DropdownButton onClick={handleOnToggle}>
-        {options.name}
-        {isHidden ? <LuChevronDown size={20} /> : <LuChevronUp size={20} />}
-      </DropdownButton>
+      {GenerateButton(data)}
       {!isHidden && (
         <DropdownList>
-          {options.items.map((item, idx) => (
-            <DropdownItem key={idx} onClick={handleOnToggle}>
-              {item}
+          {data.items.map(({ content, fn }, idx) => (
+            <DropdownItem
+              key={idx}
+              onClick={(e) => {
+                fn(e);
+                handleOnToggle();
+              }}
+            >
+              {content}
             </DropdownItem>
           ))}
         </DropdownList>

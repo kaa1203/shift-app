@@ -11,42 +11,19 @@ import {
   HeadingTwo,
   HeadingThree,
 } from "../App.styled";
+
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../../redux/modalSlice";
 import { LuClipboardPlus, LuX } from "react-icons/lu";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+
 import Editor from "../TextEditor/TiptapEditor";
-
-const GenerateHeader = (content) => {
-  const { type, title } = content;
-  let icon;
-
-  if (type === "addEntry") icon = <LuClipboardPlus size={25} />;
-
-  return (
-    <ModalTitle>
-      {icon}
-      <HeadingThree>{title}</HeadingThree>
-    </ModalTitle>
-  );
-};
-
-const GenerateBody = (content) => {
-  const { type } = content;
-
-  if (type === "addEntry") return <Editor />;
-};
-
-const GenerateButton = (content) => {
-  const { type } = content;
-
-  if (type === "addEntry") return <Button>Add</Button>;
-};
 
 const Modal = () => {
   const { isOpen, isSubmitted, content } = useSelector((state) => state.modal);
 
   const dispatch = useDispatch();
+  const editorRef = useRef(null);
 
   useEffect(() => {
     const handleOnKeydown = (e) => {
@@ -57,6 +34,41 @@ const Modal = () => {
       document.removeEventListener("keydown", handleOnKeydown);
     };
   }, []);
+
+  const GenerateHeader = (content) => {
+    const { type, title } = content;
+    let icon;
+
+    if (type === "addEntry") icon = <LuClipboardPlus size={25} />;
+
+    return (
+      <ModalTitle>
+        {icon}
+        <HeadingThree>{title}</HeadingThree>
+      </ModalTitle>
+    );
+  };
+
+  const GenerateButton = (content) => {
+    const { type } = content;
+
+    const handleOnSave = (e) => {
+      const { editor, getImages } = editorRef.current;
+      const contentJSON = editor.getJSON();
+      const images = getImages();
+      console.log(contentJSON);
+    };
+
+    if (type === "addEntry")
+      return <Button onClick={handleOnSave}>add entry</Button>;
+  };
+
+  const GenerateBody = (content) => {
+    const { type } = content;
+
+    if (type === "addEntry")
+      return <Editor ref={editorRef} defaultShowToolbar={true} />;
+  };
 
   if (!isOpen) return;
 

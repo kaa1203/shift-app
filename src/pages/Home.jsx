@@ -1,7 +1,8 @@
+import Dropdown from "../components/Dropdown";
 import Editor from "../components/TextEditor/TiptapEditor";
 
 const Home = () => {
-  return <Editor />;
+  // return <Dropdown />;
 };
 
 export default Home;
