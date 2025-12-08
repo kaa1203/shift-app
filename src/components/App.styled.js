@@ -33,7 +33,8 @@ export const SideNavWrapper = styled.nav`
 
 export const HeaderWrapper = styled.header`
   display: flex;
-  justify-content: space-between;
+  justify-content: ${({ $justify }) =>
+    $justify === "end" ? "end" : "space-between"};
   padding: 8px;
   border-bottom: 1px solid var(--muted-gray);
 `;
@@ -137,10 +138,11 @@ export const ColumnTwo = styled.section`
   flex-direction: column;
   flex: 1 1 70%;
   border-right: 1px solid var(--muted-gray);
+  overflow: hidden;
 `;
 
 export const ColumnTwoSection = styled.section`
-  overflow: auto;
+  height: 100%;
 `;
 
 export const ContentWrapper = styled.div`
@@ -156,6 +158,7 @@ export const Article = styled.article`
   padding: 10px;
   overflow: auto;
   background-color: pink;
+  height: 100%;
 `;
 
 export const DummyDiv = styled.div`
@@ -536,7 +539,6 @@ export const EditorWrapper = styled.div`
   position: relative;
   flex-direction: column;
   flex: 1;
-  border: 1px solid red;
   gap: 5px;
   overflow: hidden;
 `;
@@ -571,6 +573,7 @@ export const ToolbarWrapper = styled.div`
   align-items: center;
   gap: 24px;
   padding: 2px;
+  border-bottom: 1px solid var(--muted-gray);
 `;
 
 export const ToolbarButtonWrapper = styled.div`
@@ -610,7 +613,8 @@ export const ImageContainer = styled.div`
   flex-shrink: 0;
   overflow-x: auto;
   padding: 6px;
-  border: 1px solid blue;
+  border: 1px solid var(--muted-gray);
+  border-radius: 4px;
 `;
 
 export const ImageWrapper = styled.div`
@@ -662,8 +666,10 @@ export const DropdownList = styled.ul`
   top: 80%;
   left: -90%;
   background: var(--off-white);
-  border: 1px solid grey;
+  border: 1px solid var(--muted-gray);
+  border-radius: 4px;
   padding: 4px;
+  z-index: 999;
 `;
 
 export const DropdownItem = styled.li`
@@ -673,6 +679,7 @@ export const DropdownItem = styled.li`
   padding: 4px 0;
   gap: 5px;
   cursor: pointer;
+
   &:hover {
     background-color: var(--soft-indigo);
     color: var(--off-white);

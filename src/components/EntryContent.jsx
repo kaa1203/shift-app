@@ -26,21 +26,41 @@ import { useDispatch } from "react-redux";
 import { setFullscreen } from "../redux/fullScreenSlice";
 import { openModal } from "../redux/modalSlice";
 import Dropdown from "./Dropdown";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import Editor from "./TextEditor/TiptapEditor";
 
 const EntryContent = () => {
   const [isEditing, setIsEditing] = useState(false);
+  const [defaultShowToolbar, setDefaultShowToolbar] = useState(false);
+
   const dispatch = useDispatch();
+
+  const editorRef = useRef(null);
 
   const handleOnClick = (e) => {
     const type = e.target.closest("li").innerText.toLowerCase();
 
     if (type === "edit") {
       setIsEditing(true);
+      setDefaultShowToolbar(true);
       return;
     }
 
     return dispatch(openModal({ title: "delete entry *entry number* " }));
+  };
+
+  const handleOnSave = () => {
+    const { editor, getImages } = editorRef.current;
+    const contentJSON = editor.getJSON();
+    const images = getImages();
+    console.log(contentJSON);
+    setIsEditing(false);
+    setDefaultShowToolbar(false);
+  };
+
+  const handleOnCancel = () => {
+    setIsEditing(false);
+    setDefaultShowToolbar(false);
   };
 
   const dropdownData = {
@@ -101,12 +121,12 @@ const EntryContent = () => {
         </HeaderWrapper>
       );
     return (
-      <HeaderWrapper>
+      <HeaderWrapper $justify="end">
         <HeaderButtonWrapper>
           <HeaderButton>
-            <LuCheck size="25" />
+            <LuCheck size="25" onClick={handleOnSave} />
           </HeaderButton>
-          <HeaderButton>
+          <HeaderButton onClick={handleOnCancel}>
             <LuX size="25" />
           </HeaderButton>
         </HeaderButtonWrapper>
@@ -119,36 +139,8 @@ const EntryContent = () => {
       {GenerateHeader()}
       <ColumnTwoSection>
         <Article>
-          <h3>Lorem ipsum dolor sit.</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt
-            delectus saepe, accusamus molestiae doloremque omnis itaque amet
-            explicabo commodi voluptas facilis necessitatibus ullam maxime,
-            tempora maiores quo velit autem. Delectus, quisquam facere eveniet
-            quas voluptate non deserunt dolorem odit autem natus officiis ipsum
-            corrupti rem hic illum aliquam, excepturi ipsam? Hic eos aliquid
-            porro quasi, excepturi, nemo assumenda provident blanditiis cum
-            aperiam nulla magni molestiae voluptatibus, iusto suscipit
-            asperiores ratione repudiandae facilis neque explicabo. Sequi, illo
-            rerum est optio earum neque, molestiae aut totam fugit sapiente
-            natus enim qui mollitia sit illum, impedit recusandae sint accusamus
-            placeat commodi eligendi. Nobis sunt impedit repellat earum
-            similique accusantium culpa vel vero, quidem, tempore suscipit
-            numquam sint et optio incidunt. Facilis consequuntur id beatae culpa
-            quasi sit! Laborum omnis maxime ipsum minus similique ipsa totam,
-            reiciendis optio quis cumque ad tempore corrupti facilis temporibus
-            quos mollitia necessitatibus aliquid amet pariatur maiores soluta
-            asperiores est. Eum adipisci dolores praesentium quaerat. Dolorum
-            placeat voluptas deserunt cupiditate, dignissimos nihil, ea cum
-            aliquid quas, porro vero amet maiores quaerat ducimus non fugit
-            dolore! Ullam odit minus est consequuntur mollitia quod at! Adipisci
-            necessitatibus doloribus accusantium facere minima laboriosam
-            voluptatum magni illum nemo aspernatur sequi animi, accusamus
-            fugiat?
-          </p>
-          <DummyPicture>i am a photo</DummyPicture>
+          <Editor ref={editorRef} defaultShowToolbar={defaultShowToolbar} />
         </Article>
-        <div>asdasd</div>
       </ColumnTwoSection>
     </ColumnTwo>
   );

@@ -16,8 +16,6 @@ const Editor = forwardRef((props, ref) => {
   const [_, setRender] = useState(0);
   const [images, setImages] = useState([]);
 
-  // const editorRef = useRef(null);
-
   // tiptap editor setup
   const editor = useEditor({
     extensions: [
@@ -31,6 +29,17 @@ const Editor = forwardRef((props, ref) => {
       editor.commands.setTextSelection(endPos);
     },
   });
+
+  useEffect(() => {
+    setShowToolbar(defaultShowToolbar);
+
+    if (defaultShowToolbar) {
+      return editor.setEditable(true);
+    }
+    editor.setEditable(false);
+  }, [defaultShowToolbar]);
+
+  // const editorRef = useRef(null);
 
   useImperativeHandle(ref, () => ({
     editor,
@@ -54,7 +63,7 @@ const Editor = forwardRef((props, ref) => {
   if (!editor) return null;
 
   return (
-    <EditorWrapper onClick={() => setShowToolbar(true)}>
+    <EditorWrapper>
       {(showToolbar || images.length !== 0) && (
         <Toolbar editor={editor} setImages={setImages} />
       )}

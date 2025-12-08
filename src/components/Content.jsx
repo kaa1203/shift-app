@@ -1,7 +1,7 @@
 import EntriesList from "./EntriesList";
 import EntryContent from "./EntryContent";
 
-const Content = () => {
+const Content = ({ data }) => {
   return (
     <>
       <EntriesList />
