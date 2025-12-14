@@ -28,6 +28,7 @@ const Editor = forwardRef((props, ref) => {
       const endPos = editor.state.doc.content.size;
       editor.commands.setTextSelection(endPos);
     },
+    editable: false,
   });
 
   useEffect(() => {
@@ -36,6 +37,7 @@ const Editor = forwardRef((props, ref) => {
     if (defaultShowToolbar) {
       return editor.setEditable(true);
     }
+
     editor.setEditable(false);
   }, [defaultShowToolbar]);
 

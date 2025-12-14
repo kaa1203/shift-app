@@ -5,13 +5,15 @@ const GlobalStyle = createGlobalStyle`
 	--off-white: #faf9f6; //bg
 	--deep-slate: #1e1e2e; //bg dark
 	--soft-indigo: #6c63ff; //primary
+	--indigo: #534ccfff; //hover
 	--gentle-rose: #ff8fa3; //secondary
 	--sky-blue: #4cc9f0; //accent 
 	--black: #2d2d2d; //text
+	--black-transparent: #312f2f70; //overlay
 	--light-gray: #e6e6e6; //text
 	--muted-gray: #a1a1aa; //neutral
 	--muted-gray-transparent: #a1a1aab9; //neutral transparent
-   --soft-green:	#73d957; //success
+  --soft-green:	#73d957; //success
 	--coral-red: #ff6b6b; //warning
 	--entry-mask: linear-gradient( to bottom, var(--muted-gray-transparent), var(--muted-gray)
   );

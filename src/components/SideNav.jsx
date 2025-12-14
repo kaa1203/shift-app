@@ -109,7 +109,7 @@ const SideNav = () => {
           )}
         </Collapse>
         {!isMenuToggled && (
-          <NavLink to="/" end>
+          <NavLink to="/entries" end>
             <Logo />
           </NavLink>
         )}

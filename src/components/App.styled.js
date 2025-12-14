@@ -1,6 +1,7 @@
 import { EditorContent } from "@tiptap/react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import bg from "../assets/journal-bg.jpg";
 
 // General Style
 export const Container = styled.div`
@@ -19,7 +20,38 @@ export const HeadingTwo = styled.h2`
   font-weight: 500;
   font-size: 29px;
 `;
-export const HeadingThree = styled.h3``;
+export const HeadingThree = styled.h3`
+  font-weight: 400;
+`;
+
+export const HeadingWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Input = styled.input`
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid var(--deep-slate);
+  font: inherit;
+`;
+
+export const InputWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 8px;
+`;
+
+export const GroupedInputWrapper = styled(InputWrapper)`
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+`;
+
+export const Label = styled.label`
+  text-transform: capitalize;
+`;
 
 // Nav Style
 export const SideNavWrapper = styled.nav`
@@ -27,8 +59,11 @@ export const SideNavWrapper = styled.nav`
   flex-direction: column;
   gap: 30px;
   border-right: 1px solid var(--muted-gray);
-  max-width: 200px;
+  max-width: 220px;
   height: 100vh;
+  overflow: auto;
+  scrollbar-width: none;
+  position: relative;
 `;
 
 export const HeaderWrapper = styled.header`
@@ -49,6 +84,8 @@ export const HeaderButton = styled.button``;
 export const LogoWrapper = styled.div`
   min-width: 30px;
   height: 20px;
+  position: relative;
+  z-index: 99999999999999;
 `;
 
 export const CollapseWrapper = styled.div`
@@ -57,7 +94,12 @@ export const CollapseWrapper = styled.div`
     $padding === true ? "center" : "start"};
   align-items: center;
   gap: 20px;
+  padding: 10px 0;
   padding-left: ${({ $padding }) => ($padding === true ? "0" : "25px")};
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: var(--off-white);
 `;
 
 export const Collapse = styled.button`
@@ -65,7 +107,13 @@ export const Collapse = styled.button`
   align-items: center;
 `;
 
-export const IconWrapper = styled.div``;
+export const IconWrapper = styled.div`
+  cursor: pointer;
+
+  &:hover {
+    color: var(--soft-indigo);
+  }
+`;
 
 export const Button = styled.button``;
 
@@ -683,5 +731,177 @@ export const DropdownItem = styled.li`
   &:hover {
     background-color: var(--soft-indigo);
     color: var(--off-white);
+  }
+`;
+
+// Landing page
+
+export const LandingWrapper = styled.section`
+  display: flex;
+  width: 100%;
+  position: relative;
+`;
+
+export const LeftSide = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+
+  flex: 40%;
+  background: url(${bg}) center center/cover no-repeat;
+
+  &::after {
+    display: block;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40%;
+    height: 100%;
+    background: var(--black-transparent);
+    z-index: 9999;
+  }
+`;
+
+export const RightSide = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  flex: 60%;
+  padding: 10px;
+  overflow: auto;
+`;
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 75%;
+  gap: 10px;
+`;
+
+export const FormButton = styled(Button)`
+  padding: 10px;
+  color: var(--off-white);
+  background: var(--soft-indigo);
+  text-align: center;
+  border-radius: 4px;
+  font-weight: 600;
+  margin-top: 10px;
+
+  &:hover {
+    background: var(--indigo);
+    color: var(--off-white);
+  }
+`;
+
+export const SmallTextWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+export const SmallText = styled.p``;
+
+export const FormLink = styled.a`
+  text-decoration: underline;
+  color: var(--soft-indigo);
+
+  &:first-child {
+    margin-left: 10px;
+  }
+`;
+
+export const FormHeadingWrapper = styled(HeadingWrapper)`
+  margin: 50px 0 20px 108px;
+
+  align-self: start;
+
+  & > h1 {
+    font-size: 50px;
+  }
+`;
+
+// Custom input
+
+export const CustomInputWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 10px;
+  width: 100%;
+`;
+
+export const CustomIconWrapper = styled(IconWrapper)`
+  position: absolute;
+  top: 60%;
+  right: 3%;
+  cursor: pointer;
+`;
+
+// Carousel
+
+export const CarouselContainer = styled.div`
+  width: 800px;
+  height: 500px;
+  border: 1px solid red;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+`;
+
+export const CarouselWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  background: green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const CarouselPrev = styled(IconWrapper)`
+  position: absolute;
+  top: 50%;
+  left: 0;
+  opacity: 0.5;
+
+  &:hover {
+    opacity: 1;
+  }
+`;
+
+export const CarouselNext = styled(IconWrapper)`
+  position: absolute;
+  top: 50%;
+  right: 0;
+  opacity: 0.5;
+
+  &:hover {
+    opacity: 1;
+  }
+`;
+
+export const CarouselLegendWrapper = styled.div`
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+`;
+
+export const CarouselLegend = styled.div`
+  width: 20px;
+  height: 20px;
+  background: ${({ $current }) =>
+    $current ? "var(--soft-indigo)" : "transparent"};
+  border: 1px solid var(--black);
+  border-radius: 50%;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--soft-indigo);
   }
 `;
