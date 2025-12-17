@@ -13,8 +13,9 @@ import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 
 const Carousel = ({
   items,
-  isRotating = false,
+  isRotating = true,
   isClickable = false,
+  hasControl = true,
   duration = null,
 }) => {
   const [current, setCurrent] = useState(0);
@@ -49,14 +50,15 @@ const Carousel = ({
     e.preventDefault();
     const name = e.target.closest("div").dataset.name;
 
-    if (name === "prev") {
+    if (name === "prev")
       return setCurrent((prev) => (prev - 1 + total) % total);
-    }
 
     return setCurrent((prev) => (prev + 1) % total);
   };
 
   const startAutoRotate = () => {
+    if (!isRotating) return;
+
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
     }
@@ -100,12 +102,22 @@ const Carousel = ({
         setIsHovering(false);
       }}
     >
-      <CarouselPrev data-name="prev" onClick={(e) => handleOnClick(e, items)}>
-        <LuChevronLeft size={50} />
-      </CarouselPrev>
-      <CarouselNext data-name="next" onClick={(e) => handleOnClick(e, items)}>
-        <LuChevronRight size={50} />
-      </CarouselNext>
+      {hasControl && (
+        <>
+          <CarouselPrev
+            data-name="prev"
+            onClick={(e) => handleOnClick(e, items)}
+          >
+            <LuChevronLeft size={50} />
+          </CarouselPrev>
+          <CarouselNext
+            data-name="next"
+            onClick={(e) => handleOnClick(e, items)}
+          >
+            <LuChevronRight size={50} />
+          </CarouselNext>
+        </>
+      )}
       {generateSlides(items)}
       {generateLegends(items)}
     </CarouselContainer>

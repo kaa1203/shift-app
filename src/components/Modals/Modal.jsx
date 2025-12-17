@@ -10,6 +10,7 @@ import {
   ModalTitle,
   HeadingTwo,
   HeadingThree,
+  ModalButton,
 } from "../App.styled";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -51,6 +52,7 @@ const Modal = () => {
 
   const GenerateButton = (content) => {
     const { type } = content;
+    let button;
 
     const handleOnSave = (e) => {
       const { editor, getImages } = editorRef.current;
@@ -60,7 +62,18 @@ const Modal = () => {
     };
 
     if (type === "addEntry")
-      return <Button onClick={handleOnSave}>add entry</Button>;
+      button = (
+        <ModalButton $colored={true} onClick={handleOnSave}>
+          save
+        </ModalButton>
+      );
+
+    return (
+      <>
+        <ModalButton onClick={() => dispatch(closeModal())}>Cancel</ModalButton>
+        {button}
+      </>
+    );
   };
 
   const GenerateBody = (content) => {

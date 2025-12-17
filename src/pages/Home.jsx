@@ -1,6 +1,7 @@
 import { Fragment, useState } from "react";
 
 import {
+  CarouselItemWrapper,
   Form,
   FormButton,
   FormHeadingWrapper,
@@ -8,6 +9,7 @@ import {
   GroupedInputWrapper,
   HeadingOne,
   HeadingThree,
+  HeadingTwo,
   HeadingWrapper,
   Input,
   InputWrapper,
@@ -25,10 +27,18 @@ import CustomInput from "../components/CustomInput";
 import { useDispatch } from "react-redux";
 
 import { openModal } from "../redux/modalSlice";
+import Carousel from "../components/Carousel";
 
 const Home = () => {
   const [type, setType] = useState("login");
-  const [value, setValue] = useState({});
+  const [value, setValue] = useState({
+    user: "",
+    email: "",
+    username: "",
+    password: "",
+    regPassword: "",
+    confirmPassword: "",
+  });
 
   const dispatch = useDispatch();
 
@@ -76,8 +86,8 @@ const Home = () => {
         {
           type: "password",
           placeholder: "Password",
-          name: "password",
-          id: "password",
+          name: "regPassword",
+          id: "regPassword",
           label: "password",
         },
         {
@@ -91,7 +101,7 @@ const Home = () => {
     ],
   };
 
-  const generateInputs = (arr) => {
+  const generateInputs = (arr, handleOnChange, value) => {
     return arr[type].map((val, idx) => {
       if (Array.isArray(val)) {
         return (
@@ -105,6 +115,8 @@ const Home = () => {
                   name={name}
                   id={id}
                   label={label}
+                  value={value}
+                  handleOnChange={handleOnChange}
                 />
               );
             })}
@@ -121,6 +133,8 @@ const Home = () => {
             name={val.name}
             id={val.id}
             label={val.label}
+            value={value}
+            handleOnChange={handleOnChange}
           />
         );
       }
@@ -133,16 +147,74 @@ const Home = () => {
             id={val.id}
             name={val.name}
             autoComplete="off"
+            onChange={handleOnChange}
           />
         </InputWrapper>
       );
     });
   };
 
+  const generateItems = (items) => {
+    return items.map(({ header, subtitle }) => (
+      <CarouselItemWrapper>
+        <HeadingTwo $color="var(--off-white)">{header}</HeadingTwo>
+        <HeadingThree $color="white">{subtitle}</HeadingThree>
+      </CarouselItemWrapper>
+    ));
+  };
+
+  const items = [
+    {
+      header: "Your thoughts, at your pace",
+      subtitle: "No pressure. No noise",
+    },
+    {
+      header: "Write without expectations",
+      subtitle: "One sentence or a whole page",
+    },
+    {
+      header: "Messy ideas welcome",
+      subtitle: "Save it now. Organize it later",
+    },
+    {
+      header: "Progress, gently",
+      subtitle: "Small steps still move you forward",
+    },
+    {
+      header: "Patterns, not labels",
+      subtitle: "Understand how you feel over time",
+    },
+  ];
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+
+    const notEmpty = Object.fromEntries(
+      Object.entries(value).filter(
+        ([_, v]) => v !== "" && v !== undefined && v !== null
+      )
+    );
+
+    console.log(notEmpty);
+  };
+
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    setValue((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   return (
     <LandingWrapper>
       <LeftSide>
         <Logo style={{ fill: "white", margin: "20px", heigth: "30px" }} />
+        <Carousel
+          items={generateItems(items)}
+          duration={4000}
+          hasControl={false}
+        />
       </LeftSide>
       <RightSide>
         <FormHeadingWrapper>
@@ -156,9 +228,11 @@ const Home = () => {
           </HeadingThree>
         </FormHeadingWrapper>
         <Form>
-          {generateInputs(formType)}
+          {generateInputs(formType, handleOnChange, value)}
 
-          <FormButton>{type === "login" ? "Sign in" : "Sign up"} </FormButton>
+          <FormButton type="submit" onClick={handleOnSubmit}>
+            {type === "login" ? "Sign in" : "Sign up"}{" "}
+          </FormButton>
           <SmallTextWrapper>
             <SmallText>
               {type === "login" ? "Don't have an account?" : "Already a user?"}

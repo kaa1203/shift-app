@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
 	--gentle-rose: #ff8fa3; //secondary
 	--sky-blue: #4cc9f0; //accent 
 	--black: #2d2d2d; //text
-	--black-transparent: #312f2f70; //overlay
+	--black-transparent: rgba(49, 47, 47, 0.23); //overlay
 	--light-gray: #e6e6e6; //text
 	--muted-gray: #a1a1aa; //neutral
 	--muted-gray-transparent: #a1a1aab9; //neutral transparent

@@ -25,6 +25,8 @@ const CustomInput = ({
         placeholder={placeholder}
         name={name}
         id={id}
+        value={value[name]}
+        onChange={handleOnChange}
       />
       <CustomIconWrapper onClick={() => setShowPass(!showPass)}>
         {showPass ? <LuEye size={20} /> : <LuEyeClosed size={20} />}

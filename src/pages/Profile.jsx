@@ -33,9 +33,13 @@ import {
 } from "../components/App.styled";
 import { LuCamera, LuPen } from "react-icons/lu";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { openModal } from "../redux/modalSlice";
 
 const Profile = () => {
   const [isHidden, setIsHidden] = useState(true);
+
+  const dispatch = useDispatch();
 
   return (
     <ProfileContainer>
@@ -59,7 +63,9 @@ const Profile = () => {
 
           <MiscWrapper>
             <ButtonWrapper>
-              <ProfileButton>
+              <ProfileButton
+                onClick={() => dispatch(openModal({ title: "edit profile" }))}
+              >
                 <LuPen size="20" />
                 Edit Profile
               </ProfileButton>

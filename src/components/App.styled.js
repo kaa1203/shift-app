@@ -19,9 +19,11 @@ export const HeadingOne = styled.h1`
 export const HeadingTwo = styled.h2`
   font-weight: 500;
   font-size: 29px;
+  color: ${({ $color }) => ($color ? $color : "inherit")};
 `;
 export const HeadingThree = styled.h3`
   font-weight: 400;
+  color: ${({ $color }) => ($color ? $color : "inherit")};
 `;
 
 export const HeadingWrapper = styled.div`
@@ -509,7 +511,7 @@ export const Overlay = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 9999;
+  z-index: 99999999;
 `;
 
 export const ModalWrapper = styled.div`
@@ -531,11 +533,12 @@ export const ModalWrapper = styled.div`
 
 export const ModalHeader = styled.div`
   text-transform: capitalize;
-  color: var(--light-gray);
+  color: var(--off-white);
   background-color: var(--soft-indigo);
   border-radius: 8px 8px 0 0;
   padding: 8px;
   position: relative;
+  font-size: 20px;
 
   & button {
     position: absolute;
@@ -567,16 +570,30 @@ export const ModalBody = styled.div`
 export const ModalFooter = styled.div`
   padding: 8px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
+  gap: 15px;
+  align-items: center;
+  border-top: 1px solid var(--muted-gray-transparent);
+`;
 
-  & button {
-    background-color: var(--soft-indigo);
-    color: var(--off-white);
-    text-align: center;
-    padding: 4px;
-    border-radius: 4px;
-    flex: 0 0 80%;
-    text-transform: capitalize;
+export const ModalButton = styled(Button)`
+  text-align: center;
+  font-weight: 500;
+  padding: 8px 6px;
+  width: 80px;
+  background: ${({ $colored }) =>
+    $colored ? "var(--soft-indigo)" : "transparent"};
+  color: ${({ $colored }) => ($colored ? "var(--off-white)" : "inherit")};
+  border-radius: 4px;
+  text-transform: capitalize;
+  border: 1px solid var(--muted-gray);
+
+  &:hover {
+    background: ${({ $colored }) =>
+      $colored ? "var(--indigo)" : "transparent"};
+    color: ${({ $colored }) => ($colored ? "var(--off-white)" : "inherit")};
+    border: ${({ $colored }) =>
+      $colored ? "1px solid var(--muted-gray)" : "1px solid var(--black)"};
   }
 `;
 
@@ -589,6 +606,7 @@ export const EditorWrapper = styled.div`
   flex: 1;
   gap: 5px;
   overflow: hidden;
+  user-select: none;
 `;
 
 export const StyledEditorContent = styled(EditorContent)`
@@ -745,9 +763,9 @@ export const LandingWrapper = styled.section`
 export const LeftSide = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: start;
-
-  flex: 40%;
+  align-items: flex-start;
+  flex: 0 0 40%;
+  min-width: 0;
   background: url(${bg}) center center/cover no-repeat;
 
   &::after {
@@ -769,7 +787,7 @@ export const RightSide = styled.div`
   gap: 15px;
   justify-content: center;
   align-items: center;
-  flex: 60%;
+  flex: 0 0 60%;
   padding: 10px;
   overflow: auto;
 `;
@@ -844,9 +862,8 @@ export const CustomIconWrapper = styled(IconWrapper)`
 // Carousel
 
 export const CarouselContainer = styled.div`
-  width: 800px;
+  width: 100%;
   height: 500px;
-  border: 1px solid red;
   position: relative;
   overflow: hidden;
   user-select: none;
@@ -855,10 +872,7 @@ export const CarouselContainer = styled.div`
 export const CarouselWrapper = styled.div`
   width: 100%;
   height: 100%;
-  background: green;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
 `;
 
 export const CarouselPrev = styled(IconWrapper)`
@@ -866,6 +880,7 @@ export const CarouselPrev = styled(IconWrapper)`
   top: 50%;
   left: 0;
   opacity: 0.5;
+  transform: translateY(-50%);
 
   &:hover {
     opacity: 1;
@@ -877,6 +892,7 @@ export const CarouselNext = styled(IconWrapper)`
   top: 50%;
   right: 0;
   opacity: 0.5;
+  transform: translateY(-50%);
 
   &:hover {
     opacity: 1;
@@ -890,18 +906,31 @@ export const CarouselLegendWrapper = styled.div`
   bottom: 5%;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 99999;
 `;
 
 export const CarouselLegend = styled.div`
-  width: 20px;
-  height: 20px;
+  width: 12px;
+  height: 12px;
   background: ${({ $current }) =>
     $current ? "var(--soft-indigo)" : "transparent"};
-  border: 1px solid var(--black);
+  border: 1px solid var(--off-white);
   border-radius: 50%;
   cursor: pointer;
 
   &:hover {
     background: var(--soft-indigo);
   }
+`;
+
+export const CarouselItemWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 60px;
+  align-items: center;
+  width: 80%;
+  position: absolute;
+  inset: 0;
+  margin: auto;
 `;
