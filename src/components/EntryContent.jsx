@@ -3,12 +3,9 @@ import {
   HeaderWrapper,
   HeaderButtonWrapper,
   HeaderButton,
-  HeadingThree,
-  SectionList,
-  SectionItem,
   Article,
-  DummyPicture,
   ColumnTwoSection,
+  HeadingThree,
 } from "./App.styled";
 
 import {
@@ -18,22 +15,29 @@ import {
   LuFullscreen,
   LuPencil,
   LuTrash,
-  LuCheck,
-  LuX,
+  LuMinimize,
 } from "react-icons/lu";
 
-import { useDispatch } from "react-redux";
-import { setFullscreen } from "../redux/fullScreenSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { setFullscreen } from "../redux/fullscreenSlice";
 import { openModal } from "../redux/modalSlice";
 import Dropdown from "./Dropdown";
 import { useRef, useState } from "react";
 import Editor from "./TextEditor/TiptapEditor";
+import { useLocation } from "react-router-dom";
+import GoalContent from "./GoalContent";
 
 const EntryContent = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [defaultShowToolbar, setDefaultShowToolbar] = useState(false);
 
+  const { isFullscreen } = useSelector((state) => state.fullscreen);
+
   const dispatch = useDispatch();
+
+  const location = useLocation();
+
+  const currentPage = location.pathname.slice(1);
 
   const editorRef = useRef(null);
 
@@ -50,12 +54,16 @@ const EntryContent = () => {
   };
 
   const handleOnSave = () => {
-    const { editor, getImages } = editorRef.current;
-    const contentJSON = editor.getJSON();
-    const images = getImages();
-    console.log(contentJSON);
+    if (["entries", "journals"].includes(currentPage)) {
+      const { editor, getImages } = editorRef.current;
+      const contentJSON = editor.getJSON();
+      const images = getImages();
+      setDefaultShowToolbar(false);
+
+      console.log(contentJSON);
+    }
+
     setIsEditing(false);
-    setDefaultShowToolbar(false);
   };
 
   const handleOnCancel = () => {
@@ -87,7 +95,7 @@ const EntryContent = () => {
     ],
   };
 
-  const GenerateHeader = () => {
+  const generateHeader = () => {
     if (!isEditing)
       return (
         <HeaderWrapper>
@@ -99,10 +107,16 @@ const EntryContent = () => {
               <LuArrowRight size="25" />
             </HeaderButton>
           </HeaderButtonWrapper>
-          <h3>August 25. 2025</h3>
+          <HeadingThree>August 25. 2025</HeadingThree>
           <HeaderButtonWrapper>
-            <HeaderButton onClick={() => dispatch(setFullscreen())}>
-              <LuFullscreen size="25" />
+            <HeaderButton
+              onClick={() => dispatch(setFullscreen({ currentPage }))}
+            >
+              {isFullscreen[currentPage] ? (
+                <LuMinimize size="23" />
+              ) : (
+                <LuFullscreen size="25" />
+              )}
             </HeaderButton>
             <Dropdown data={dropdownData} />
             <HeaderButton
@@ -121,26 +135,38 @@ const EntryContent = () => {
         </HeaderWrapper>
       );
     return (
-      <HeaderWrapper $justify="end">
+      <HeaderWrapper $justify="space-between">
         <HeaderButtonWrapper>
-          <HeaderButton>
-            <LuCheck size="25" onClick={handleOnSave} />
-          </HeaderButton>
           <HeaderButton onClick={handleOnCancel}>
-            <LuX size="25" />
+            <LuArrowLeft size="25" />
+          </HeaderButton>
+        </HeaderButtonWrapper>
+        <HeadingThree>Currently editing...</HeadingThree>
+        <HeaderButtonWrapper>
+          <HeaderButton $hover={"var(--coral-red)"} onClick={handleOnCancel}>
+            Cancel
+          </HeaderButton>
+          <HeaderButton $hover={"var(--soft-green)"} onClick={handleOnSave}>
+            save
           </HeaderButton>
         </HeaderButtonWrapper>
       </HeaderWrapper>
     );
   };
 
+  const generateBody = () => {
+    if (["entries", "journals"].includes(currentPage)) {
+      return <Editor ref={editorRef} defaultShowToolbar={defaultShowToolbar} />;
+    }
+
+    if (currentPage === "goals") return <GoalContent />;
+  };
+
   return (
     <ColumnTwo>
-      {GenerateHeader()}
+      {generateHeader()}
       <ColumnTwoSection>
-        <Article>
-          <Editor ref={editorRef} defaultShowToolbar={defaultShowToolbar} />
-        </Article>
+        <Article>{generateBody()}</Article>
       </ColumnTwoSection>
     </ColumnTwo>
   );

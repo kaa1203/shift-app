@@ -17,13 +17,18 @@ export const HeadingOne = styled.h1`
   font-weight: 600;
 `;
 export const HeadingTwo = styled.h2`
+  position: ${({ $position }) => ($position ? $position : "unset")};
   font-weight: 500;
   font-size: 29px;
   color: ${({ $color }) => ($color ? $color : "inherit")};
+  text-transform: ${({ $textTransform }) =>
+    $textTransform ? $textTransform : "inherit"};
 `;
 export const HeadingThree = styled.h3`
   font-weight: 400;
   color: ${({ $color }) => ($color ? $color : "inherit")};
+  text-transform: ${({ $textTransform }) =>
+    $textTransform ? $textTransform : "inherit"};
 `;
 
 export const HeadingWrapper = styled.div`
@@ -72,6 +77,7 @@ export const HeaderWrapper = styled.header`
   display: flex;
   justify-content: ${({ $justify }) =>
     $justify === "end" ? "end" : "space-between"};
+  align-items: center;
   padding: 8px;
   border-bottom: 1px solid var(--muted-gray);
 `;
@@ -79,9 +85,19 @@ export const HeaderWrapper = styled.header`
 export const HeaderButtonWrapper = styled.div`
   display: flex;
   gap: 20px;
+  text-transform: capitalize;
 `;
 
-export const HeaderButton = styled.button``;
+export const HeaderButton = styled.button`
+  display: ${({ $display }) => ($display === "block" ? "block" : $display)};
+  align-items: ${({ $align }) => ($align ? $align : "unset")};
+  justify-content: ${({ $justify }) => ($justify ? $justify : "unset")};
+  gap: ${({ $gap }) => ($gap ? $gap : "unset")};
+
+  &:hover {
+    color: ${({ $hover }) => ($hover ? $hover : "var(--soft-indigo)")};
+  }
+`;
 
 export const LogoWrapper = styled.div`
   min-width: 30px;
@@ -207,7 +223,6 @@ export const Article = styled.article`
   flex-direction: column;
   padding: 10px;
   overflow: auto;
-  background-color: pink;
   height: 100%;
 `;
 
@@ -607,12 +622,17 @@ export const EditorWrapper = styled.div`
   gap: 5px;
   overflow: hidden;
   user-select: none;
+  font-family: "Libre Baskerville";
+  background: var(--paper);
+  padding: 20px 8px;
+  box-shadow: 0 10px 30px rgba(60, 50, 40, 0.08);
 `;
 
 export const StyledEditorContent = styled(EditorContent)`
   flex: 1;
   overflow: auto;
   padding: 0 4px;
+  hyphens: auto;
 
   ul {
     list-style-type: disc;
@@ -638,8 +658,9 @@ export const ToolbarWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 24px;
-  padding: 2px;
+  padding: 8px;
   border-bottom: 1px solid var(--muted-gray);
+  margin-bottom: 15px;
 `;
 
 export const ToolbarButtonWrapper = styled.div`
@@ -729,8 +750,8 @@ export const DropdownButton = styled.button`
 `;
 export const DropdownList = styled.ul`
   position: absolute;
-  top: 80%;
-  left: -90%;
+  top: 100%;
+  right: 0%;
   background: var(--off-white);
   border: 1px solid var(--muted-gray);
   border-radius: 4px;
@@ -742,8 +763,8 @@ export const DropdownItem = styled.li`
   display: flex;
   align-items: center;
   text-transform: capitalize;
-  padding: 4px 0;
-  gap: 5px;
+  padding: 4px 12px;
+  gap: 10px;
   cursor: pointer;
 
   &:hover {
@@ -830,6 +851,10 @@ export const FormLink = styled.a`
   &:first-child {
     margin-left: 10px;
   }
+
+  &:hover {
+    color: var(--indigo);
+  }
 `;
 
 export const FormHeadingWrapper = styled(HeadingWrapper)`
@@ -840,6 +865,46 @@ export const FormHeadingWrapper = styled(HeadingWrapper)`
   & > h1 {
     font-size: 50px;
   }
+`;
+
+// Goal Page
+
+export const GoalWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: hidden;
+`;
+
+export const GoalStatsWrapper = styled.div`
+  flex: 0 0 25%;
+  border-radius: 8px;
+  padding: 10px;
+  background: var(--paper);
+  // box-shadow: 0 10px 30px rgba(60, 50, 40, 0.08);
+  border: 1px solid var(--black);
+`;
+
+export const GoalStats = styled.div``;
+
+export const GoalBodyWrapper = styled.div`
+  flex: 1 1 0;
+  min-height: 0;
+  border-radius: 8px;
+  overflow: auto;
+  background: var(--paper);
+  // box-shadow: 0 10px 30px rgba(60, 50, 40, 0.08);
+  border: 1px solid var(--black);
+  position: relative;
+`;
+
+export const GoalHeadingTwo = styled(HeadingTwo)`
+  position: sticky;
+  top: 0;
+  left: 0;
+  background: var(--paper);
+  padding: 10px;
 `;
 
 // Custom input
@@ -933,4 +998,51 @@ export const CarouselItemWrapper = styled.div`
   position: absolute;
   inset: 0;
   margin: auto;
+`;
+
+// Accordion
+
+export const AccordionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 5px;
+  gap: 15px;
+`;
+
+export const AccordionWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+export const AccordionList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  margin-left: 30px;
+  gap: 10px;
+  padding: 8px;
+  border: 1px solid var(--black);
+  border-radius: 8px;
+`;
+
+export const AccordionItem = styled.li`
+  padding: 5px;
+  margin: ${({ $margin }) => ($margin ? $margin : "unset")};
+  text-transform: ${({ $textTransform }) =>
+    $textTransform ? $textTransform : "inherit"};
+`;
+
+export const AccordionButton = styled.button`
+  display: flex;
+  gap: 2px;
+  align-items: center;
+  font-size: ${({ $fontSize }) => ($fontSize ? $fontSize : "inherit")};
+  text-transform: ${({ $textTransform }) =>
+    $textTransform ? $textTransform : "inherit"};
+`;
+
+export const AccordionIconWrapper = styled(IconWrapper)`
+  display: flex;
 `;

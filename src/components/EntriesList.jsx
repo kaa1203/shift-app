@@ -19,11 +19,16 @@ import {
   LuFilter,
   LuSearch,
 } from "react-icons/lu";
+import { useLocation } from "react-router-dom";
 
 const EntriesList = ({ data }) => {
   const { isFullscreen } = useSelector((state) => state.fullscreen);
 
-  if (isFullscreen) return;
+  const location = useLocation();
+
+  const currentPage = location.pathname.slice(1);
+
+  if (isFullscreen[currentPage]) return;
 
   return (
     <ColumnOne>

@@ -16,6 +16,21 @@ const Editor = forwardRef((props, ref) => {
   const [_, setRender] = useState(0);
   const [images, setImages] = useState([]);
 
+  const htmlContent = `
+	<h1 style="text-align: center;"><strong>Your first journal entry</strong></h1>
+	<br/>
+	<h2 style="text-align: left;">Start writing your thoughts,</h2>
+	<h2 style="text-align: left;">feelings or anything</h2>
+	<h2 style="text-align: left;">you want to remember.</h2>
+	<p></p>
+	<h2 style="text-align: left;">Each entry will be saved and</h2>
+
+	<h2 style="text-align: left;">you can edit it anytime.</h2>
+	<p></p> 
+	<p></p>
+	<h2 style="text-align: left;">Begin writing...</h2>
+`;
+
   // tiptap editor setup
   const editor = useEditor({
     extensions: [
@@ -23,7 +38,7 @@ const Editor = forwardRef((props, ref) => {
       TextAlign.configure({ types: ["heading", "paragraph"] }),
       Highlight,
     ],
-    content: "<p>Hello world!</p>",
+    content: htmlContent,
     onCreate: ({ editor }) => {
       const endPos = editor.state.doc.content.size;
       editor.commands.setTextSelection(endPos);

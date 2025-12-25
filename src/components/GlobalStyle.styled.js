@@ -3,6 +3,7 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyle = createGlobalStyle`
 :root {
 	--off-white: #faf9f6; //bg
+	--paper: #ffffff; //bg
 	--deep-slate: #1e1e2e; //bg dark
 	--soft-indigo: #6c63ff; //primary
 	--indigo: #534ccfff; //hover
@@ -38,7 +39,7 @@ body {
 	color: var(--black);
 	margin: 0;
 	padding: 0;
-	font-family: "Roboto", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-family: 'Inter', 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	font-weight: 400;
 	font-size: 16px;
 }

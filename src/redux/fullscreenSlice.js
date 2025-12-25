@@ -2,10 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const fullscreenSlice = createSlice({
   name: "fullscreen",
-  initialState: { isFullscreen: false },
+  initialState: {
+    isFullscreen: {},
+  },
   reducers: {
-    setFullscreen: (state, _) => {
-      state.isFullscreen = !state.isFullscreen;
+    setFullscreen: (state, action) => {
+      const { currentPage } = action.payload;
+
+      state.isFullscreen[currentPage] = !state.isFullscreen[currentPage];
     },
   },
 });

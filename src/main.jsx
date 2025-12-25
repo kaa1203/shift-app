@@ -15,7 +15,6 @@ import { store } from "./redux/store.js";
 import NotFound from "./pages/NotFound.jsx";
 import Home from "./pages/Home.jsx";
 import Entries from "./pages/Entries.jsx";
-import Entry from "./pages/Entry.jsx";
 import Profile from "./pages/Profile.jsx";
 import Tags from "./pages/Tags.jsx";
 import Ideas from "./pages/Ideas.jsx";
@@ -34,10 +33,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<App />}>
         <Route path="/" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/entries">
-          <Route index element={<Entries />} />
-          <Route path=":id" element={<Entry />} />
-        </Route>
+        <Route path="/entries" element={<Entries />} />
         <Route path="/journals" element={<Journals />} />
         <Route path="/goals" element={<Goals />} />
         <Route path="/ideas" element={<Ideas />} />

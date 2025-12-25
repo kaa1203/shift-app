@@ -1,13 +1,3 @@
-import EntriesList from "./EntriesList";
-import EntryContent from "./EntryContent";
-
-const Content = ({ data }) => {
-  return (
-    <>
-      <EntriesList />
-      <EntryContent />
-    </>
-  );
-};
+const Content = ({ children }) => <>{children}</>;
 
 export default Content;
