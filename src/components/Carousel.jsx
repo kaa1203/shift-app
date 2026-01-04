@@ -10,6 +10,7 @@ import {
 } from "./App.styled";
 
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
+import throttle from "../utils/throttle";
 
 const Carousel = ({
   items,
@@ -83,9 +84,10 @@ const Carousel = ({
       }
     };
 
-    document.addEventListener("keydown", modifyPage);
+    document.addEventListener("keydown", throttle(modifyPage));
+
     return () => {
-      document.removeEventListener("keydown", modifyPage);
+      document.removeEventListener("keydown", throttle(modifyPage));
     };
   }, []);
 

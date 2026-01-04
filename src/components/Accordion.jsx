@@ -9,12 +9,18 @@ import {
   AccordionIconWrapper,
 } from "./App.styled";
 
-import convertNumberToWords from "../utils/convertNumberToWords";
+import { LuChevronDown, LuChevronRight, LuMinus, LuPlus } from "react-icons/lu";
 
-import { LuChevronDown, LuChevronRight, LuPlus } from "react-icons/lu";
-
-const Accordion = ({ datas }) => {
-  const [isOpen, setIsOpen] = useState({});
+const Accordion = ({
+  datas,
+  accIsOpen = {},
+  startIcon,
+  endIcon,
+  containerStyling,
+  wrapperStyling,
+  listStyling,
+}) => {
+  const [isOpen, setIsOpen] = useState(accIsOpen);
 
   const handleOnClick = (key) => {
     setIsOpen((prev) => ({
@@ -24,37 +30,37 @@ const Accordion = ({ datas }) => {
   };
 
   return (
-    <AccordionContainer>
-      {datas.map(({ title, key, items }, idx) => {
+    <AccordionContainer $containerStyling={containerStyling}>
+      {datas.map(({ title, items }, idx) => {
         return (
-          <AccordionWrapper key={idx}>
+          <AccordionWrapper key={idx} $wrapperStyling={wrapperStyling}>
             <AccordionButton
-              onClick={() => handleOnClick(key)}
-              $fontSize="23px"
+              onClick={() => handleOnClick(idx)}
+              $buttonStyling={title.styling}
               $textTransform="capitalize"
+              $isOpen={isOpen[idx]}
             >
-              <AccordionIconWrapper>
-                {isOpen[key] ? (
-                  <LuChevronDown size={26} />
-                ) : (
-                  <LuChevronRight size={26} />
-                )}
-              </AccordionIconWrapper>
-              {title}
+              {startIcon && (
+                <AccordionIconWrapper>
+                  {isOpen[idx] ? (
+                    <LuChevronDown size={22} />
+                  ) : (
+                    <LuChevronRight size={22} />
+                  )}
+                </AccordionIconWrapper>
+              )}
+              {title.content}
+              {endIcon && (
+                <AccordionIconWrapper style={{ marginLeft: "auto" }}>
+                  {isOpen[idx] ? <LuMinus size={22} /> : <LuPlus size={22} />}
+                </AccordionIconWrapper>
+              )}
             </AccordionButton>
-            {isOpen[key] && (
-              <AccordionList>
+            {isOpen[idx] && (
+              <AccordionList $listStyling={listStyling}>
                 {items.map((item, id) => (
-                  <AccordionItem key={id}>{item.note}</AccordionItem>
+                  <AccordionItem key={id}>{item}</AccordionItem>
                 ))}
-                <AccordionItem>
-                  <AccordionButton>
-                    <AccordionIconWrapper>
-                      <LuPlus size={18} />
-                    </AccordionIconWrapper>
-                    Add log for day {convertNumberToWords(key)}
-                  </AccordionButton>
-                </AccordionItem>
               </AccordionList>
             )}
           </AccordionWrapper>

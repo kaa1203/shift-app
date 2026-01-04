@@ -28,17 +28,11 @@ import { useDispatch } from "react-redux";
 
 import { openModal } from "../redux/modalSlice";
 import Carousel from "../components/Carousel";
+import generateInput from "../utils/generateInput";
 
 const Home = () => {
   const [type, setType] = useState("login");
-  const [value, setValue] = useState({
-    user: "",
-    email: "",
-    username: "",
-    password: "",
-    regPassword: "",
-    confirmPassword: "",
-  });
+  const [value, setValue] = useState({});
 
   const dispatch = useDispatch();
 
@@ -101,59 +95,6 @@ const Home = () => {
     ],
   };
 
-  const generateInputs = (arr, handleOnChange, value) => {
-    return arr[type].map((val, idx) => {
-      if (Array.isArray(val)) {
-        return (
-          <GroupedInputWrapper key={idx}>
-            {val.map(({ type, placeholder, name, id, label }, ind) => {
-              return (
-                <CustomInput
-                  key={ind}
-                  type={type}
-                  placeholder={placeholder}
-                  name={name}
-                  id={id}
-                  label={label}
-                  value={value}
-                  handleOnChange={handleOnChange}
-                />
-              );
-            })}
-          </GroupedInputWrapper>
-        );
-      }
-
-      if (val.type === "password") {
-        return (
-          <CustomInput
-            key={idx}
-            type={val.type}
-            placeholder={val.placeholder}
-            name={val.name}
-            id={val.id}
-            label={val.label}
-            value={value}
-            handleOnChange={handleOnChange}
-          />
-        );
-      }
-      return (
-        <InputWrapper key={idx}>
-          <Label htmlFor={val.id}>{val.label}</Label>
-          <Input
-            type={val.type}
-            placeholder={val.placeholder}
-            id={val.id}
-            name={val.name}
-            autoComplete="off"
-            onChange={handleOnChange}
-          />
-        </InputWrapper>
-      );
-    });
-  };
-
   const generateItems = (items) => {
     return items.map(({ header, subtitle }) => (
       <CarouselItemWrapper>
@@ -200,16 +141,36 @@ const Home = () => {
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
+
     setValue((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
 
+  const FORM_CONFIG = {
+    login: {
+      h1: "Welcome back!",
+      h3: "Access your account below.",
+      button: "Sign in",
+      smallText: "Don't have an account?",
+      link: "Sign up here!",
+      forgot: true,
+    },
+    register: {
+      h1: "Get started.",
+      h3: "It only takes a minute.",
+      button: "Sign up",
+      smallText: "Already a user?",
+      link: "Sign in here!",
+      forgot: false,
+    },
+  };
+
   return (
     <LandingWrapper>
       <LeftSide>
-        <Logo style={{ fill: "white", margin: "20px", heigth: "30px" }} />
+        <Logo style={{ fill: "white", margin: "20px", height: "25px" }} />
         <Carousel
           items={generateItems(items)}
           duration={4000}
@@ -218,24 +179,18 @@ const Home = () => {
       </LeftSide>
       <RightSide>
         <FormHeadingWrapper>
-          <HeadingOne>
-            {type === "login" ? "Welcome back!" : "Get started"}
-          </HeadingOne>
-          <HeadingThree>
-            {type === "login"
-              ? "Access your account below."
-              : "It only takes a minute"}
-          </HeadingThree>
+          <HeadingOne>{FORM_CONFIG[type].h1}</HeadingOne>
+          <HeadingThree>{FORM_CONFIG[type].h3}</HeadingThree>
         </FormHeadingWrapper>
-        <Form>
-          {generateInputs(formType, handleOnChange, value)}
+        <Form $width="74%	">
+          {generateInput(formType[type], handleOnChange, value)}
 
           <FormButton type="submit" onClick={handleOnSubmit}>
-            {type === "login" ? "Sign in" : "Sign up"}{" "}
+            {FORM_CONFIG[type].button}
           </FormButton>
           <SmallTextWrapper>
             <SmallText>
-              {type === "login" ? "Don't have an account?" : "Already a user?"}
+              {FORM_CONFIG[type].smallText}
               <FormLink
                 href="#"
                 onClick={(e) => {
@@ -246,16 +201,16 @@ const Home = () => {
                   );
                 }}
               >
-                {type === "login" ? "Signup here!" : "Signin here!"}
+                {FORM_CONFIG[type].link}
               </FormLink>
             </SmallText>
-            {type === "login" && (
+            {FORM_CONFIG[type].forgot && (
               <SmallText>
                 <FormLink
                   href="#"
                   onClick={(e) => {
                     e.preventDefault();
-                    dispatch(openModal({ title: "forgot password" }));
+                    dispatch(openModal({ type: "FORGOT_PASSWORD" }));
                   }}
                 >
                   Forgot password?

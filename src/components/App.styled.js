@@ -41,6 +41,11 @@ export const Input = styled.input`
   border-radius: 4px;
   border: 1px solid var(--deep-slate);
   font: inherit;
+
+  &:focus {
+    box-shadow: 0 0 0 2px var(--indigo);
+    border: 1px solid transparent;
+  }
 `;
 
 export const InputWrapper = styled.div`
@@ -48,6 +53,23 @@ export const InputWrapper = styled.div`
   flex-direction: column;
   width: 100%;
   gap: 8px;
+`;
+
+export const TextArea = styled.textarea`
+  font: inherit;
+  border: 1px solid var(--deep-slate);
+  border-radius: 4px;
+  padding: 10px;
+  width: 100%;
+  resize: none;
+  min-height: 0;
+
+  &:focus {
+    box-shadow: 0 0 0 2px var(--indigo);
+    border: 1px solid transparent;
+  }
+
+  ${({ $style }) => $style}
 `;
 
 export const GroupedInputWrapper = styled(InputWrapper)`
@@ -104,6 +126,8 @@ export const LogoWrapper = styled.div`
   height: 20px;
   position: relative;
   z-index: 99999999999999;
+
+  ${({ $style }) => $style};
 `;
 
 export const CollapseWrapper = styled.div`
@@ -112,7 +136,7 @@ export const CollapseWrapper = styled.div`
     $padding === true ? "center" : "start"};
   align-items: center;
   gap: 20px;
-  padding: 10px 0;
+  padding: 5px 0;
   padding-left: ${({ $padding }) => ($padding === true ? "0" : "25px")};
   position: sticky;
   top: 0;
@@ -536,14 +560,15 @@ export const ModalWrapper = styled.div`
   transform: translate(-50%, -50%);
   border: 1px solid var(--muted-gray);
   background-color: var(--off-white);
-  width: 70vw;
-  min-height: 60vh;
-  max-height: calc(98vh - 15px);
   border-radius: 10px;
+  min-width: 40vw;
+  min-height: 30vh;
 
   display: flex;
   flex-direction: column;
   overflow: hidden;
+
+  ${({ $style }) => $style}
 `;
 
 export const ModalHeader = styled.div`
@@ -580,6 +605,8 @@ export const ModalBody = styled.div`
   flex-direction: column;
   min-height: 0;
   overflow: hidden;
+
+  ${({ $style }) => $style};
 `;
 
 export const ModalFooter = styled.div`
@@ -757,6 +784,7 @@ export const DropdownList = styled.ul`
   border-radius: 4px;
   padding: 4px;
   z-index: 999;
+  width: max-content;
 `;
 
 export const DropdownItem = styled.li`
@@ -817,7 +845,7 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   flex: 1;
-  width: 75%;
+  width: ${({ $width }) => ($width ? $width : "100%")};
   gap: 10px;
 `;
 
@@ -842,7 +870,9 @@ export const SmallTextWrapper = styled.div`
   width: 100%;
 `;
 
-export const SmallText = styled.p``;
+export const SmallText = styled.p`
+  ${({ $style }) => $style}
+`;
 
 export const FormLink = styled.a`
   text-decoration: underline;
@@ -877,28 +907,6 @@ export const GoalWrapper = styled.div`
   overflow: hidden;
 `;
 
-export const GoalStatsWrapper = styled.div`
-  flex: 0 0 25%;
-  border-radius: 8px;
-  padding: 10px;
-  background: var(--paper);
-  // box-shadow: 0 10px 30px rgba(60, 50, 40, 0.08);
-  border: 1px solid var(--black);
-`;
-
-export const GoalStats = styled.div``;
-
-export const GoalBodyWrapper = styled.div`
-  flex: 1 1 0;
-  min-height: 0;
-  border-radius: 8px;
-  overflow: auto;
-  background: var(--paper);
-  // box-shadow: 0 10px 30px rgba(60, 50, 40, 0.08);
-  border: 1px solid var(--black);
-  position: relative;
-`;
-
 export const GoalHeadingTwo = styled(HeadingTwo)`
   position: sticky;
   top: 0;
@@ -906,6 +914,41 @@ export const GoalHeadingTwo = styled(HeadingTwo)`
   background: var(--paper);
   padding: 10px;
 `;
+
+export const GoalAccTitleWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+`;
+
+export const GoalsNoteWrapper = styled.div`
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+`;
+
+export const GoalStatusIndicatorWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  gap: 10px;
+  width: 110px;
+`;
+
+export const GoalStatusIndicator = styled.div`
+  width: 15px;
+  height: 15px;
+  background: ${({ $status }) =>
+    $status === "completed"
+      ? "var(--soft-green)"
+      : $status === "skipped"
+        ? "var(--coral-red)"
+        : "var(--sky-blue)"};
+  border-radius: 50%;
+`;
+
+export const GoalLogWrapper = styled.div``;
 
 // Custom input
 
@@ -1006,25 +1049,26 @@ export const AccordionContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 5px;
-  gap: 15px;
+  gap: 10px;
+  ${({ $containerStyling }) => $containerStyling};
 `;
 
 export const AccordionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  border: 1px solid var(--muted-gray);
+  border-top: none;
+  ${({ $wrapperStyling }) => $wrapperStyling};
 `;
 
 export const AccordionList = styled.ul`
   display: flex;
   flex-direction: column;
-  width: 95%;
-  margin-left: 30px;
-  gap: 10px;
-  padding: 8px;
-  border: 1px solid var(--black);
-  border-radius: 8px;
+  text-align: justify;
+  // gap: 5px;
+  padding: 0 8px 5px 8px;
+  ${({ $listStyling }) => $listStyling};
 `;
 
 export const AccordionItem = styled.li`
@@ -1036,11 +1080,16 @@ export const AccordionItem = styled.li`
 
 export const AccordionButton = styled.button`
   display: flex;
-  gap: 2px;
   align-items: center;
-  font-size: ${({ $fontSize }) => ($fontSize ? $fontSize : "inherit")};
+  gap: 2px;
+  font-size: inherit;
   text-transform: ${({ $textTransform }) =>
     $textTransform ? $textTransform : "inherit"};
+  padding: 8px;
+  border-top: 1px solid var(--muted-gray);
+  border-bottom: ${({ $isOpen }) =>
+    $isOpen ? "1px solid var(--muted-gray)" : "none"};
+  ${({ $buttonStyling }) => $buttonStyling}
 `;
 
 export const AccordionIconWrapper = styled(IconWrapper)`

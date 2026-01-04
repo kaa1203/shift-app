@@ -7,7 +7,7 @@ import {
   ImageWrapper,
   IconWrapper,
 } from "../App.styled";
-import { handleImageUpload } from "../../utils/handleImageUpload";
+import handleImageUpload from "../../utils/handleImageUpload";
 
 const ImageGroup = ({ images, setImages }) => {
   if (images.length === 0) return;

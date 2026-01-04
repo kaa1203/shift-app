@@ -19,12 +19,12 @@ import { LuClipboardPlus, LuX } from "react-icons/lu";
 import { useEffect, useRef } from "react";
 
 import Editor from "../TextEditor/TiptapEditor";
+import MODAL_REGISTRY from "../../utils/modalRegistry";
 
 const Modal = () => {
-  const { isOpen, isSubmitted, content } = useSelector((state) => state.modal);
+  const { isOpen, isSubmitted, props } = useSelector((state) => state.modal);
 
   const dispatch = useDispatch();
-  const editorRef = useRef(null);
 
   useEffect(() => {
     const handleOnKeydown = (e) => {
@@ -36,66 +36,16 @@ const Modal = () => {
     };
   }, []);
 
-  const GenerateHeader = (content) => {
-    const { type, title } = content;
-    let icon;
+  if (!isOpen) return null;
 
-    if (type === "addEntry") icon = <LuClipboardPlus size={25} />;
+  const ActiveModal = MODAL_REGISTRY[props.type];
 
-    return (
-      <ModalTitle>
-        {icon}
-        <HeadingThree>{title}</HeadingThree>
-      </ModalTitle>
-    );
-  };
-
-  const GenerateButton = (content) => {
-    const { type } = content;
-    let button;
-
-    const handleOnSave = (e) => {
-      const { editor, getImages } = editorRef.current;
-      const contentJSON = editor.getJSON();
-      const images = getImages();
-      console.log(contentJSON);
-    };
-
-    if (type === "addEntry")
-      button = (
-        <ModalButton $colored={true} onClick={handleOnSave}>
-          save
-        </ModalButton>
-      );
-
-    return (
-      <>
-        <ModalButton onClick={() => dispatch(closeModal())}>Cancel</ModalButton>
-        {button}
-      </>
-    );
-  };
-
-  const GenerateBody = (content) => {
-    const { type } = content;
-
-    if (type === "addEntry")
-      return <Editor ref={editorRef} defaultShowToolbar={true} />;
-  };
-
-  if (!isOpen) return;
+  if (!ActiveModal) return null;
 
   return ReactDOM.createPortal(
     <Overlay onClick={() => dispatch(closeModal())}>
-      <ModalWrapper onClick={(e) => e.stopPropagation()}>
-        <ModalHeader>
-          {GenerateHeader(content)}
-          <Button onClick={() => dispatch(closeModal())}>
-            <LuX size={25} />
-          </Button>
-        </ModalHeader>
-        <ModalBody> {GenerateBody(content)}</ModalBody>
-        <ModalFooter>{GenerateButton(content)}</ModalFooter>
+      <ModalWrapper $style={props.style} onClick={(e) => e.stopPropagation()}>
+        <ActiveModal />
       </ModalWrapper>
     </Overlay>,
     document.getElementById("modalRoot")

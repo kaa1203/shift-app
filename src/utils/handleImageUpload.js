@@ -1,4 +1,4 @@
-export const handleImageUpload = async (e, setImages) => {
+const handleImageUpload = async (e, setImages) => {
   const files = Array.from(e.target.files);
 
   const filteredFiles = files.filter((file) =>
@@ -19,3 +19,5 @@ export const handleImageUpload = async (e, setImages) => {
   );
   setImages((prevState) => [...prevState, ...images]);
 };
+
+export default handleImageUpload;

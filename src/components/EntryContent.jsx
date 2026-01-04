@@ -22,14 +22,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { setFullscreen } from "../redux/fullscreenSlice";
 import { openModal } from "../redux/modalSlice";
 import Dropdown from "./Dropdown";
-import { useRef, useState } from "react";
-import Editor from "./TextEditor/TiptapEditor";
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import GoalContent from "./GoalContent";
 
-const EntryContent = () => {
+const EntryContent = ({
+  content,
+  customOnEdit,
+  customOnSave,
+  customOnDelete,
+  customOnCancel,
+}) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [defaultShowToolbar, setDefaultShowToolbar] = useState(false);
 
   const { isFullscreen } = useSelector((state) => state.fullscreen);
 
@@ -39,36 +42,48 @@ const EntryContent = () => {
 
   const currentPage = location.pathname.slice(1);
 
-  const editorRef = useRef(null);
+  const handleOnEdit = () => {
+    customOnEdit();
+    setIsEditing(true);
+  };
 
-  const handleOnClick = (e) => {
-    const type = e.target.closest("li").innerText.toLowerCase();
-
-    if (type === "edit") {
-      setIsEditing(true);
-      setDefaultShowToolbar(true);
-      return;
-    }
-
-    return dispatch(openModal({ title: "delete entry *entry number* " }));
+  const handleOnDelete = () => {
+    customOnDelete();
   };
 
   const handleOnSave = () => {
-    if (["entries", "journals"].includes(currentPage)) {
-      const { editor, getImages } = editorRef.current;
-      const contentJSON = editor.getJSON();
-      const images = getImages();
-      setDefaultShowToolbar(false);
-
-      console.log(contentJSON);
-    }
-
+    customOnSave();
     setIsEditing(false);
   };
 
   const handleOnCancel = () => {
+    customOnCancel();
     setIsEditing(false);
-    setDefaultShowToolbar(false);
+  };
+
+  const handleOpenModal = (type) => {
+    let style;
+
+    switch (type) {
+      case "journals":
+        style = {
+          minHeight: "60vh",
+          maxHeight: " calc(98vh - 15px)",
+          width: "70vw",
+        };
+        break;
+      case "goals":
+        style = {
+          minHeight: "60vh",
+          maxHeight: " calc(98vh - 15px)",
+          width: "45vw",
+        };
+        break;
+      default:
+        break;
+    }
+
+    dispatch(openModal({ type: `ADD_${type.toUpperCase()}`, style }));
   };
 
   const dropdownData = {
@@ -81,7 +96,7 @@ const EntryContent = () => {
             edit
           </>
         ),
-        fn: handleOnClick,
+        fn: handleOnEdit,
       },
       {
         content: (
@@ -90,7 +105,50 @@ const EntryContent = () => {
             delete
           </>
         ),
-        fn: handleOnClick,
+        fn: handleOnDelete,
+      },
+    ],
+  };
+
+  const entriesDropdown = {
+    type: "custom",
+    icon: <LuPlus size={25} />,
+    items: [
+      {
+        content: (
+          <>
+            <LuPlus size={20} />
+            add journal
+          </>
+        ),
+        fn: () => handleOpenModal("journals"),
+      },
+      {
+        content: (
+          <>
+            <LuPlus size={20} />
+            add goal
+          </>
+        ),
+        fn: () => handleOpenModal("goals"),
+      },
+      {
+        content: (
+          <>
+            <LuPlus size={20} />
+            add idea
+          </>
+        ),
+        fn: () => handleOpenModal("ideas"),
+      },
+      {
+        content: (
+          <>
+            <LuPlus size={20} />
+            add mental health
+          </>
+        ),
+        fn: () => handleOpenModal("mental-health"),
       },
     ],
   };
@@ -118,19 +176,14 @@ const EntryContent = () => {
                 <LuFullscreen size="25" />
               )}
             </HeaderButton>
-            <Dropdown data={dropdownData} />
-            <HeaderButton
-              onClick={() =>
-                dispatch(
-                  openModal({
-                    title: "add entry",
-                    type: "addEntry",
-                  })
-                )
-              }
-            >
-              <LuPlus size="25" />
-            </HeaderButton>
+            <Dropdown data={dropdownData} iconSize={25} />
+            {currentPage === "entries" ? (
+              <Dropdown data={entriesDropdown} iconSize={25} />
+            ) : (
+              <HeaderButton onClick={() => handleOpenModal(currentPage)}>
+                <LuPlus size="25" />
+              </HeaderButton>
+            )}
           </HeaderButtonWrapper>
         </HeaderWrapper>
       );
@@ -154,19 +207,11 @@ const EntryContent = () => {
     );
   };
 
-  const generateBody = () => {
-    if (["entries", "journals"].includes(currentPage)) {
-      return <Editor ref={editorRef} defaultShowToolbar={defaultShowToolbar} />;
-    }
-
-    if (currentPage === "goals") return <GoalContent />;
-  };
-
   return (
     <ColumnTwo>
       {generateHeader()}
       <ColumnTwoSection>
-        <Article>{generateBody()}</Article>
+        <Article>{content}</Article>
       </ColumnTwoSection>
     </ColumnTwo>
   );

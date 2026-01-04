@@ -7,7 +7,6 @@ import {
   InsightsMoodGraph,
   InsightsSection,
 } from "../components/App.styled";
-import Chart from "../components/Charts";
 
 const Insights = () => (
   <InsightsSection>

@@ -2,7 +2,7 @@ import { LogoWrapper } from "./App.styled";
 
 const Logo = ({ style }) => {
   return (
-    <LogoWrapper style={style}>
+    <LogoWrapper $style={style}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 192.635 60"

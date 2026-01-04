@@ -19,13 +19,13 @@ const CustomInput = ({
 
   return (
     <CustomInputWrapper>
-      <Label htmlFor={id}>{label}</Label>
+      {label && <Label htmlFor={id}>{label}</Label>}
       <Input
         type={showPass ? "text" : "password"}
         placeholder={placeholder}
         name={name}
         id={id}
-        value={value[name]}
+        value={value}
         onChange={handleOnChange}
       />
       <CustomIconWrapper onClick={() => setShowPass(!showPass)}>

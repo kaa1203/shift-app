@@ -16,6 +16,7 @@ const GlobalStyle = createGlobalStyle`
 	--muted-gray-transparent: #a1a1aab9; //neutral transparent
   --soft-green:	#73d957; //success
 	--coral-red: #ff6b6b; //warning
+	--sky-blue:   #4dabf7; 
 	--entry-mask: linear-gradient( to bottom, var(--muted-gray-transparent), var(--muted-gray)
   );
 }

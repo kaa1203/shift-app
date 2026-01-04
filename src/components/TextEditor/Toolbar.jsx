@@ -23,7 +23,7 @@ import {
   ToolbarLabel,
   ToolbarWrapper,
 } from "../App.styled";
-import { handleImageUpload } from "../../utils/handleImageUpload";
+import handleImageUpload from "../../utils/handleImageUpload";
 
 const MergedButtons = (buttons) => {
   return Object.values(buttons).reduce((acc, btn) => {
@@ -130,15 +130,6 @@ const Toolbar = ({ editor, setImages }) => {
 
   return (
     <ToolbarWrapper>
-      {/* {buttonArr.map(({ type, name, icon, level }, idx) => (
-        <ToolbarButton
-          key={idx}
-          onClick={() => handleOnClick(name, level)}
-          $isActive={isActive(name, level)}
-        >
-          {icon}
-        </ToolbarButton>
-      ))} */}
       {GenerateButtons(buttonArr, isActive, handleOnClick)}
       <ToolbarLabel>
         <LuImage size={28} />

@@ -5,9 +5,14 @@ import {
   DropdownList,
   DropdownWrapper,
 } from "./App.styled";
-import { LuChevronDown, LuChevronUp, LuEllipsis } from "react-icons/lu";
+import {
+  LuChevronDown,
+  LuChevronUp,
+  LuEllipsis,
+  LuEllipsisVertical,
+} from "react-icons/lu";
 
-const Dropdown = ({ data }, setValue) => {
+const Dropdown = ({ data, iconSize = 20 }, setValue) => {
   const [isHidden, setIsHidden] = useState(true);
   const dropdownRef = useRef(null);
 
@@ -35,21 +40,41 @@ const Dropdown = ({ data }, setValue) => {
   };
 
   const GenerateButton = (options) => {
-    const { type, name } = options;
+    const { type, name, icon } = options;
+    const CustomIcon = icon;
 
-    if (type === "default")
-      return (
-        <DropdownButton onClick={handleOnToggle}>
-          {name}
-          {isHidden ? <LuChevronDown size={20} /> : <LuChevronUp size={20} />}
-        </DropdownButton>
-      );
-
-    return (
-      <DropdownButton onClick={handleOnToggle}>
-        <LuEllipsis size={25} />
-      </DropdownButton>
-    );
+    switch (type) {
+      case "ellipsis":
+        return (
+          <DropdownButton onClick={handleOnToggle}>
+            <LuEllipsis size={iconSize} />
+          </DropdownButton>
+        );
+      case "ellipsis-vertical":
+        return (
+          <DropdownButton onClick={handleOnToggle}>
+            <LuEllipsisVertical size={iconSize} />
+          </DropdownButton>
+        );
+      case "custom":
+        return (
+          <DropdownButton onClick={handleOnToggle}>
+            {name}
+            {icon}
+          </DropdownButton>
+        );
+      default:
+        return (
+          <DropdownButton onClick={handleOnToggle}>
+            {name}
+            {isHidden ? (
+              <LuChevronDown size={iconSize} />
+            ) : (
+              <LuChevronUp size={iconSize} />
+            )}
+          </DropdownButton>
+        );
+    }
   };
 
   return (
