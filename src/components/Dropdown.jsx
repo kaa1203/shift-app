@@ -41,7 +41,6 @@ const Dropdown = ({ data, iconSize = 20 }, setValue) => {
 
   const GenerateButton = (options) => {
     const { type, name, icon } = options;
-    const CustomIcon = icon;
 
     switch (type) {
       case "ellipsis":

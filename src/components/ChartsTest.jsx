@@ -8,6 +8,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { GraphWrapper } from "./App.styled";
 
 const BChart = () => {
   const data = [
@@ -21,7 +22,7 @@ const BChart = () => {
   ];
 
   return (
-    <ResponsiveContainer width="100%" height={200}>
+    <ResponsiveContainer width="100%" height="100%">
       <BarChart data={data}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
@@ -88,7 +89,11 @@ const ChartsTest = ({ data }) => {
     const { type, data } = chartData;
     switch (type) {
       case "bar":
-        return <BChart />;
+        return (
+          <GraphWrapper>
+            <BChart />
+          </GraphWrapper>
+        );
 
       default:
         break;

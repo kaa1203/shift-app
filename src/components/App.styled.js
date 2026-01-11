@@ -23,12 +23,16 @@ export const HeadingTwo = styled.h2`
   color: ${({ $color }) => ($color ? $color : "inherit")};
   text-transform: ${({ $textTransform }) =>
     $textTransform ? $textTransform : "inherit"};
+
+  ${({ $style }) => $style};
 `;
 export const HeadingThree = styled.h3`
   font-weight: 400;
   color: ${({ $color }) => ($color ? $color : "inherit")};
   text-transform: ${({ $textTransform }) =>
     $textTransform ? $textTransform : "inherit"};
+
+  ${({ $style }) => $style};
 `;
 
 export const HeadingWrapper = styled.div`
@@ -63,6 +67,7 @@ export const TextArea = styled.textarea`
   width: 100%;
   resize: none;
   min-height: 0;
+  height: auto;
 
   &:focus {
     box-shadow: 0 0 0 2px var(--indigo);
@@ -157,7 +162,9 @@ export const IconWrapper = styled.div`
   }
 `;
 
-export const Button = styled.button``;
+export const Button = styled.button`
+  ${({ $style }) => $style}
+`;
 
 export const NavMenu = styled.ul`
   display: flex;
@@ -382,6 +389,7 @@ export const MiscWrapper = styled.div`
 
 export const ButtonWrapper = styled.div`
   align-self: end;
+  ${({ $style }) => $style};
 `;
 
 export const ProfileButton = styled.button`
@@ -905,6 +913,8 @@ export const GoalWrapper = styled.div`
   flex-direction: column;
   gap: 10px;
   overflow: hidden;
+
+  ${({ $style }) => $style}
 `;
 
 export const GoalHeadingTwo = styled(HeadingTwo)`
@@ -926,6 +936,7 @@ export const GoalsNoteWrapper = styled.div`
   display: flex;
   align-items: start;
   justify-content: space-between;
+  ${({ $style }) => $style};
 `;
 
 export const GoalStatusIndicatorWrapper = styled.div`
@@ -948,7 +959,40 @@ export const GoalStatusIndicator = styled.div`
   border-radius: 50%;
 `;
 
-export const GoalLogWrapper = styled.div``;
+export const GoalLogWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 10px;
+`;
+
+export const GoalLog = styled.div`
+  flex: 1;
+  border: 1px dashed red;
+`;
+
+export const GoalEditButton = styled(ModalButton)`
+  text-transform: capitalize;
+  font-size: 13px;
+  margin-left: 10px;
+  width: 40px;
+  padding: 6px 8px;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+`;
+
+export const GoalAddLog = styled.div`
+  flex: 1;
+  display: "flex";
+  align-items: "center";
+  gap: 5px;
+  color: var(--muted-gray);
+  margin-left: 15px;
+  cursor: text;
+`;
 
 // Custom input
 
@@ -1066,13 +1110,12 @@ export const AccordionList = styled.ul`
   display: flex;
   flex-direction: column;
   text-align: justify;
-  // gap: 5px;
-  padding: 0 8px 5px 8px;
+  padding: 0 8px 8px 8px;
+  gap: 15px;
   ${({ $listStyling }) => $listStyling};
 `;
 
 export const AccordionItem = styled.li`
-  padding: 5px;
   margin: ${({ $margin }) => ($margin ? $margin : "unset")};
   text-transform: ${({ $textTransform }) =>
     $textTransform ? $textTransform : "inherit"};
@@ -1094,4 +1137,10 @@ export const AccordionButton = styled.button`
 
 export const AccordionIconWrapper = styled(IconWrapper)`
   display: flex;
+`;
+
+export const GraphWrapper = styled.div`
+  width: 80%;
+  height: 180px;
+  margin: 0 auto;
 `;
