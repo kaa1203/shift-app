@@ -4,7 +4,7 @@ const throttle = (fn, duration) => {
   return (...args) => {
     if (shouldWait) return;
 
-    fn.apply(this, args);
+    fn(...args);
     shouldWait = true;
 
     setTimeout(() => {

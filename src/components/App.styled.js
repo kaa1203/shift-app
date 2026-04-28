@@ -46,6 +46,8 @@ export const Input = styled.input`
   border: 1px solid var(--deep-slate);
   font: inherit;
 
+  ${({ $style }) => $style};
+
   &:focus {
     box-shadow: 0 0 0 2px var(--indigo);
     border: 1px solid transparent;
@@ -85,6 +87,7 @@ export const GroupedInputWrapper = styled(InputWrapper)`
 
 export const Label = styled.label`
   text-transform: capitalize;
+  ${({ $style }) => $style};
 `;
 
 // Nav Style
@@ -778,11 +781,13 @@ export const ImageInput = styled.input`
 export const DropdownWrapper = styled.div`
   position: relative;
 `;
+
 export const DropdownButton = styled.button`
   display: flex;
   align-items: center;
   text-transform: capitalize;
 `;
+
 export const DropdownList = styled.ul`
   position: absolute;
   top: 100%;
@@ -907,15 +912,23 @@ export const FormHeadingWrapper = styled(HeadingWrapper)`
 
 // Goal Page
 
-export const GoalWrapper = styled.div`
-  flex: 1;
+export const GoalHeader = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  overflow: hidden;
-
-  ${({ $style }) => $style}
 `;
+
+export const GoalStatsWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid red;
+
+  ${({ $style }) => $style};
+`;
+
+export const GoalCheckpoints = styled.div``;
+
+export const GoalInsights = styled.div``;
 
 export const GoalHeadingTwo = styled(HeadingTwo)`
   position: sticky;
@@ -992,6 +1005,22 @@ export const GoalAddLog = styled.div`
   color: var(--muted-gray);
   margin-left: 15px;
   cursor: text;
+`;
+
+// Chart
+
+export const ChartWrapper = styled.div`
+  width: 60%;
+  height: 200px;
+  position: relative;
+`;
+
+export const ChartPercentage = styled.div`
+  position: absolute;
+  top: 75%;
+  left: 45%;
+  font-size: 30px;
+  font-weight: 600;
 `;
 
 // Custom input
@@ -1132,7 +1161,7 @@ export const AccordionButton = styled.button`
   border-top: 1px solid var(--muted-gray);
   border-bottom: ${({ $isOpen }) =>
     $isOpen ? "1px solid var(--muted-gray)" : "none"};
-  ${({ $buttonStyling }) => $buttonStyling}
+  ${({ $buttonStyling }) => $buttonStyling};
 `;
 
 export const AccordionIconWrapper = styled(IconWrapper)`
@@ -1143,4 +1172,266 @@ export const GraphWrapper = styled.div`
   width: 80%;
   height: 180px;
   margin: 0 auto;
+`;
+
+export const RatingWrapper = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+
+export const RatingLabel = styled(Label)`
+  cursor: pointer;
+  &:hover > svg {
+    color: var(--soft-indigo);
+  }
+
+  & input:checked + svg {
+    color: var(--soft-indigo);
+  }
+`;
+
+export const RatingOption = styled(Input)`
+  display: none;
+`;
+
+// Checkbox
+
+export const CheckboxList = styled.ul`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px;
+`;
+
+export const CheckboxItem = styled.li`
+  display: flex;
+  gap: 5px;
+`;
+
+export const Checkbox = styled.div`
+  width: 25px;
+  height: 25px;
+  border: 1px solid var(--deep-slate);
+`;
+
+export const CheckboxInput = styled.input`
+  display: none;
+
+  &:checked ~ label {
+    background: var(--soft-indigo);
+  }
+`;
+
+export const CheckboxLabel = styled.label`
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  border: 1px solid var(--deep-slate);
+  cursor: pointer;
+  user-select: none;
+`;
+
+export const CheckboxIconWrapper = styled(IconWrapper)`
+  display: none;
+
+  &:hover {
+    color: var(--off-white);
+  }
+
+  ${({ $isChecked }) =>
+    $isChecked &&
+    `
+		display: block;
+		color: var(--off-white);
+	`};
+`;
+
+export const CheckboxTextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 10px;
+
+  ${({ $style }) => $style};
+`;
+
+export const CheckboxContentWrapper = styled.div`
+  flex: 0 0 60%;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  ${({ $isChecked }) =>
+    $isChecked &&
+    `
+		& p {
+			text-decoration: line-through;
+			color: var(--muted-gray);
+		}
+	`};
+`;
+
+export const CheckboxContentDisplayWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 95%;
+  padding: 4px;
+`;
+
+export const CheckboxContentDisplay = styled.div`
+  border: 1px solid black;
+  border-radius: 8px;
+  position: relative;
+  min-height: 100px;
+  padding: 10px;
+  width: 95%;
+`;
+
+export const CheckboxContentDisplayStats = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+  text-transform: capitalize;
+  position: absolute;
+  bottom: 5%;
+`;
+
+export const CheckboxContentDisplayP = styled.div`
+  text-transform: capitalize;
+`;
+
+export const CheckboxContentDisplayIcon = styled.div`
+  position: absolute;
+  top: 14%;
+  right: 2%;
+`;
+
+export const CheckboxContentEdit = styled(TextArea)`
+  text-decoration: none;
+  height: 150px;
+`;
+
+export const CheckboxButtonWrapper = styled.div`
+  display: flex;
+  justify-content: end;
+  gap: 8px;
+`;
+
+export const CheckboxButton = styled(ModalButton)`
+  padding: 4px;
+  width: 60px;
+  font-size: 15px;
+`;
+
+export const CheckboxMoodContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const CheckboxMood = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  text-transform: capitalize;
+`;
+
+export const CheckboxNumInput = styled(Input)`
+  padding: 4px 8px;
+  border: none;
+  border-bottom: 1px solid var(--deep-slate);
+  border-radius: unset;
+  background: transparent;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+
+  &:focus {
+    border: none;
+    box-shadow: 0px 2px 0px 0px var(--soft-indigo);
+  }
+`;
+
+// Progress bar
+
+export const ProgressBarWrapper = styled.div`
+  width: 100%;
+  height: 30px;
+`;
+
+export const ProgressBarContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  border: 1px solid var(--muted-gray);
+  padding: 1px;
+  position: relative;
+`;
+
+export const ProgressPercentage = styled.p`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
+export const ProgressBar = styled.div`
+  width: ${({ $percentage }) => $percentage + `%`};
+  height: 100%;
+  background: var(--soft-indigo);
+  border-radius: 20px;
+
+  & ~ p {
+    color: ${({ $percentage }) =>
+      $percentage < 53 ? "var (--deep-slate)" : "var(--off-white)"};
+  }
+`;
+
+// Steps
+
+export const StepsList = styled.ul`
+  flex: auto;
+  display: flex;
+  border: 1px dashed;
+  justify-content: center;
+  padding: 0 10px;
+`;
+
+export const StepsItem = styled.li`
+  position: relative;
+  flex: 1;
+
+  // &:not(:last-child) {
+  // }
+
+  &:first-child {
+    margin-left: 3%;
+  }
+
+  &:not(:last-child)::after {
+    position: absolute;
+    top: 13px;
+    left: 18%;
+    display: block;
+    content: "";
+    width: 75%;
+    height: 2px;
+    background: var(--muted-gray);
+  }
+`;
+
+export const StepsLabel = styled(Label)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--muted-gray);
 `;

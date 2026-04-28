@@ -10,7 +10,8 @@ import {
 } from "./App.styled";
 
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
-import throttle from "../utils/throttle";
+
+import debounce from "../utils/debounce";
 
 const Carousel = ({
   items,
@@ -84,10 +85,12 @@ const Carousel = ({
       }
     };
 
-    document.addEventListener("keydown", throttle(modifyPage));
+    const debouncedHandler = debounce(modifyPage, 300);
+
+    document.addEventListener("keydown", debouncedHandler);
 
     return () => {
-      document.removeEventListener("keydown", throttle(modifyPage));
+      document.removeEventListener("keydown", debouncedHandler);
     };
   }, []);
 
